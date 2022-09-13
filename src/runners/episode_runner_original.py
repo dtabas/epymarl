@@ -76,9 +76,8 @@ class EpisodeRunner:
             }
 
             self.batch.update(post_transition_data, ts=self.t)
-            
-            if self.train_stats.get("n_episodes", 0) % 200 == 0:
-                self.env.render()
+
+            self.env.render()
             
             self.t += 1
 

@@ -1,0 +1,378 @@
+[INFO 15:53:05] pymarl Running command 'my_main'
+[INFO 15:53:06] pymarl Started run with ID "1"
+[DEBUG 15:53:06] pymarl Starting Heartbeat
+[DEBUG 15:53:06] my_main Started
+[WARNING 15:53:06] my_main CUDA flag use_cuda was switched OFF automatically because no CUDA devices are available!
+[INFO 15:53:06] my_main Experiment Parameters:
+[INFO 15:53:06] my_main 
+
+{   'action_selector': 'epsilon_greedy',
+    'add_value_last_step': True,
+    'agent': 'rnn',
+    'agent_output_type': 'q',
+    'batch_size': 32,
+    'batch_size_run': 1,
+    'buffer_cpu_only': True,
+    'buffer_size': 5000,
+    'checkpoint_path': '',
+    'double_q': True,
+    'env': 'gymma',
+    'env_args': {   'key': 'mpe:Simple-v0',
+                    'pretrained_wrapper': None,
+                    'seed': 219681125,
+                    'time_limit': 25},
+    'epsilon_anneal_time': 50000,
+    'epsilon_finish': 0.05,
+    'epsilon_start': 1.0,
+    'evaluate': False,
+    'evaluation_epsilon': 0.0,
+    'gamma': 0.99,
+    'grad_norm_clip': 10,
+    'hidden_dim': 64,
+    'hypergroup': None,
+    'hypernet_embed': 64,
+    'hypernet_layers': 2,
+    'label': 'default_label',
+    'learner': 'q_learner',
+    'learner_log_interval': 10000,
+    'load_step': 0,
+    'local_results_path': 'results',
+    'log_interval': 50000,
+    'lr': 0.0005,
+    'mac': 'basic_mac',
+    'mixer': 'qmix',
+    'mixing_embed_dim': 32,
+    'name': 'qmix',
+    'obs_agent_id': True,
+    'obs_individual_obs': False,
+    'obs_last_action': False,
+    'optim_alpha': 0.99,
+    'optim_eps': 1e-05,
+    'repeat_id': 1,
+    'runner': 'episode',
+    'runner_log_interval': 10000,
+    'save_model': False,
+    'save_model_interval': 50000,
+    'save_replay': False,
+    'seed': 219681125,
+    'standardise_returns': False,
+    'standardise_rewards': True,
+    't_max': 2050000,
+    'target_update_interval_or_tau': 200,
+    'test_greedy': True,
+    'test_interval': 50000,
+    'test_nepisode': 100,
+    'use_cuda': False,
+    'use_rnn': False,
+    'use_tensorboard': False}
+
+[DEBUG 15:53:06] matplotlib matplotlib data path: /Users/danieltabas/opt/anaconda3/envs/MARL_env/lib/python3.8/site-packages/matplotlib/mpl-data
+[DEBUG 15:53:06] matplotlib CONFIGDIR=/Users/danieltabas/.matplotlib
+[DEBUG 15:53:06] matplotlib interactive is False
+[DEBUG 15:53:06] matplotlib platform is darwin
+[DEBUG 15:53:06] matplotlib loaded modules: ['sys', 'builtins', '_frozen_importlib', '_imp', '_warnings', '_io', 'marshal', 'posix', '_frozen_importlib_external', '_thread', '_weakref', 'time', 'zipimport', '_codecs', 'codecs', 'encodings.aliases', 'encodings', 'encodings.utf_8', '_signal', '__main__', 'encodings.latin_1', '_abc', 'abc', 'io', '_stat', 'stat', '_collections_abc', 'genericpath', 'posixpath', 'os.path', 'os', '_sitebuiltins', '_locale', '_bootlocale', '_distutils_hack', 'types', 'importlib._bootstrap', 'importlib._bootstrap_external', 'warnings', 'importlib', 'importlib.machinery', 'importlib.abc', '_operator', 'operator', 'keyword', '_heapq', 'heapq', 'itertools', 'reprlib', '_collections', 'collections', '_functools', 'functools', 'contextlib', 'importlib.util', 'mpl_toolkits', 'google', 'site', 'enum', 'numpy._globals', 'numpy.__config__', '_ctypes', '_struct', 'struct', 'ctypes._endian', 'ctypes', 'mkl._mklinit', 'cython_runtime', 'numbers', 'mkl._py_mkl_service', 'mkl', 'numpy._distributor_init', '__future__', '_sre', 'sre_constants', 'sre_parse', 'sre_compile', 'copyreg', 're', '_json', 'json.scanner', 'json.decoder', 'json.encoder', 'json', 'numpy._version', 'numpy.version', 'math', '_datetime', 'datetime', 'numpy.core._multiarray_umath', 'numpy.compat._inspect', 'numpy.compat._pep440', 'fnmatch', 'ntpath', 'errno', 'urllib', 'urllib.parse', 'pathlib', '_compat_pickle', '_pickle', 'pickle', 'numpy.compat.py3k', 'numpy.compat', 'numpy.core.overrides', 'numpy.core.multiarray', 'numpy.core.umath', 'numpy.core._string_helpers', 'numpy.core._dtype', 'numpy.core._type_aliases', 'numpy.core.numerictypes', 'numpy.core._exceptions', 'numpy.core._methods', 'numpy.core.fromnumeric', 'numpy.core.shape_base', 'collections.abc', 'numpy.core._ufunc_config', 'numpy.core.arrayprint', 'numpy.core._asarray', 'numpy.core.numeric', 'numpy.core.defchararray', 'numpy.core.records', 'numpy.core.memmap', 'numpy.core.function_base', 'numpy.core._machar', 'numpy.core.getlimits', 'numpy.core.einsumfunc', 'numpy.core._multiarray_tests', 'numpy.core._add_newdocs', 'platform', 'signal', '_weakrefset', 'threading', '_posixsubprocess', 'select', 'selectors', 'subprocess', 'numpy.core._add_newdocs_scalars', 'numpy.core._dtype_ctypes', '_ast', 'ast', 'numpy.core._internal', 'numpy._pytesttester', 'numpy.core', 'numpy.lib.mixins', 'numpy.lib.ufunclike', 'numpy.lib.type_check', 'numpy.lib.scimath', 'numpy.lib.stride_tricks', 'numpy.lib.twodim_base', 'numpy.linalg._umath_linalg', 'numpy.linalg.linalg', 'numpy.linalg', 'numpy.matrixlib.defmatrix', 'numpy.matrixlib', 'numpy.lib.histograms', 'numpy.lib.function_base', 'numpy.lib.index_tricks', 'numpy.lib.nanfunctions', 'numpy.lib.shape_base', 'numpy.lib.polynomial', 'textwrap', 'numpy.lib.utils', 'numpy.lib.arraysetops', 'weakref', 'numpy.lib.format', 'numpy.lib._datasource', 'numpy.lib._iotools', 'numpy.lib.npyio', 'numpy.lib.arrayterator', 'numpy.lib.arraypad', 'numpy.lib._version', 'numpy.lib', 'numpy.fft._pocketfft_internal', 'numpy.fft._pocketfft', 'numpy.fft.helper', 'numpy.fft', 'numpy.polynomial.polyutils', 'numpy.polynomial._polybase', 'numpy.polynomial.polynomial', 'numpy.polynomial.chebyshev', 'numpy.polynomial.legendre', 'numpy.polynomial.hermite', 'numpy.polynomial.hermite_e', 'numpy.polynomial.laguerre', 'numpy.polynomial', '_cython_0_29_32', 'numpy.random._common', 'binascii', 'base64', '_hashlib', '_blake2', '_sha3', 'hashlib', 'hmac', '_bisect', 'bisect', '_sha512', '_random', 'random', 'secrets', 'numpy.random.bit_generator', 'numpy.random._bounded_integers', 'numpy.random._mt19937', 'numpy.random.mtrand', 'numpy.random._philox', 'numpy.random._pcg64', 'numpy.random._sfc64', 'numpy.random._generator', 'numpy.random._pickle', 'numpy.random', 'numpy.ctypeslib', '_opcode', 'opcode', 'dis', 'token', 'tokenize', 'linecache', 'inspect', 'numpy.ma.core', 'numpy.ma.extras', 'numpy.ma', 'numpy', 'copy', 'sacred.__about__', 'zlib', '_compression', '_bz2', 'bz2', '_lzma', 'lzma', 'pwd', 'grp', 'shutil', 'zipfile', 'pkgutil', 'xml', 'xml.parsers', 'pyexpat.errors', 'pyexpat.model', 'pyexpat', 'xml.parsers.expat.model', 'xml.parsers.expat.errors', 'xml.parsers.expat', 'plistlib', 'email', 'email.errors', '_string', 'string', 'email.quoprimime', 'email.base64mime', 'quopri', 'email.encoders', 'email.charset', 'email.header', '_socket', 'socket', 'locale', 'calendar', 'email._parseaddr', 'email.utils', 'email._policybase', 'email.feedparser', 'email.parser', 'tempfile', 'pkg_resources.extern', 'pkg_resources._vendor', 'pkg_resources._vendor.jaraco', 'pkg_resources.extern.jaraco', 'typing.io', 'typing.re', 'typing', 'importlib.resources', 'pkg_resources._vendor.zipp', 'pkg_resources._vendor.importlib_resources._compat', 'pkg_resources._vendor.importlib_resources.abc', 'pkg_resources._vendor.importlib_resources._common', 'pkg_resources._vendor.importlib_resources._legacy', 'pkg_resources._vendor.importlib_resources', 'pkg_resources.extern.importlib_resources', '_queue', 'queue', 'pkg_resources._vendor.more_itertools.recipes', 'pkg_resources._vendor.more_itertools.more', 'pkg_resources._vendor.more_itertools', 'pkg_resources.extern.more_itertools', 'pkg_resources.extern.jaraco.functools', 'pkg_resources.extern.jaraco.context', 'pkg_resources.extern.jaraco.text', 'pkg_resources._vendor.appdirs', 'pkg_resources.extern.appdirs', 'pkg_resources._vendor.packaging.__about__', 'pkg_resources._vendor.packaging', 'pkg_resources.extern.packaging', 'pkg_resources.extern.packaging._structures', 'pkg_resources.extern.packaging.version', 'traceback', 'atexit', 'logging', 'sysconfig', 'pkg_resources._vendor.packaging._manylinux', 'pkg_resources._vendor.packaging._musllinux', 'pkg_resources.extern.packaging.tags', 'pkg_resources.extern.packaging.utils', 'pkg_resources.extern.packaging.specifiers', 'pkg_resources._vendor.pyparsing.util', 'pkg_resources._vendor.pyparsing.unicode', 'pkg_resources._vendor.pyparsing.exceptions', 'pkg_resources._vendor.pyparsing.actions', 'pprint', 'pkg_resources._vendor.pyparsing.results', 'pkg_resources._vendor.pyparsing.core', 'html.entities', 'html', 'pkg_resources._vendor.pyparsing.helpers', 'pkg_resources._vendor.pyparsing.testing', 'pkg_resources._vendor.pyparsing.common', 'pkg_resources._vendor.pyparsing', 'pkg_resources.extern.pyparsing', 'pkg_resources.extern.packaging.markers', 'pkg_resources.extern.packaging.requirements', '_osx_support', '_sysconfigdata__darwin_darwin', 'pkg_resources', 'six', 'munch.python3_compat', 'yaml.error', 'yaml.tokens', 'yaml.events', 'yaml.nodes', 'yaml.reader', 'yaml.scanner', 'yaml.parser', 'yaml.composer', 'yaml.constructor', 'yaml.resolver', 'yaml.loader', 'yaml.emitter', 'yaml.serializer', 'yaml.representer', 'yaml.dumper', 'yaml', 'munch', 'sacred.settings', 'docopt', 'shlex', 'jsonpickle.compat', 'jsonpickle.backend', '_decimal', 'decimal', 'jsonpickle.tags', 'jsonpickle.util', 'array', '_uuid', 'uuid', 'jsonpickle.handlers', 'jsonpickle.pickler', 'jsonpickle.unpickler', '_csv', 'csv', 'configparser', 'importlib.metadata', 'uu', 'email._encoded_words', 'email.iterators', 'email.message', 'jsonpickle.version', 'jsonpickle', 'packaging.__about__', 'packaging', 'packaging._structures', 'packaging.version', 'wrapt._wrappers', 'wrapt.wrappers', 'wrapt.decorators', 'wrapt.importer', 'wrapt', 'sacred.utils', 'ctypes.macholib', 'ctypes.macholib.framework', 'ctypes.macholib.dylib', 'ctypes.macholib.dyld', 'ctypes.util', 'pytz.exceptions', 'pytz.lazy', 'pytz.tzinfo', 'pytz.tzfile', 'pytz', 'dateutil._version', 'dateutil', 'pandas._typing', '_cython_0_29_30', 'pandas._libs.tslibs.dtypes', 'pandas._libs.tslibs.base', 'pandas._libs.tslibs.np_datetime', 'pandas._libs.tslibs.nattype', 'six.moves', 'dateutil.tz._common', 'dateutil.tz._factories', 'dateutil.tz.tz', 'dateutil.tz', 'pandas._libs.tslibs.timezones', 'pandas._libs.tslibs.ccalendar', 'pandas._libs.tslibs.tzconversion', 'pandas._config.config', 'pandas._config.dates', 'pandas._config.display', 'pandas._config', 'pandas._config.localization', 'pandas._libs.tslibs.strptime', 'pandas._libs.tslibs.fields', 'pandas._libs.tslibs.timedeltas', 'pandas._libs.tslibs.timestamps', 'dateutil.easter', 'dateutil._common', 'dateutil.relativedelta', 'pandas._libs.properties', 'pandas._libs.tslibs.offsets', 'dateutil.parser._parser', 'dateutil.parser.isoparser', 'dateutil.parser', 'pandas._libs.tslibs.parsing', 'pandas._libs.tslibs.conversion', 'pandas._libs.tslibs.period', 'pandas._libs.tslibs.vectorized', 'pandas._libs.tslibs', 'pandas._libs.ops_dispatch', 'pandas._libs.missing', 'pandas._libs.hashtable', 'pandas._libs.algos', 'pandas._libs.interval', 'pandas._libs', 'pandas.util._decorators', 'pandas.core', 'pandas.core.util', 'pandas._libs.tslib', 'pandas._libs.lib', 'pandas._libs.hashing', 'pandas.core.dtypes', 'pandas.util._exceptions', 'pandas.errors', 'pandas.core.dtypes.generic', 'pandas.core.dtypes.base', 'pandas.core.dtypes.inference', 'pandas.core.dtypes.dtypes', 'pandas.core.dtypes.common', 'pandas.core.util.hashing', 'pandas.util', 'pandas.util.version', 'pandas.compat.numpy', 'pandas.compat.pyarrow', 'pandas.compat', 'pandas.core.config_init', 'pandas.core.dtypes.missing', 'pandas.util._validators', 'pandas.core.dtypes.cast', 'pandas.core.dtypes.concat', 'pandas.core.array_algos', 'pandas.core.common', 'pandas.core.construction', 'pandas.core.array_algos.take', 'pandas.core.indexers.utils', 'pandas.core.indexers', 'pandas.core.algorithms', 'pandas.compat.numpy.function', 'pandas.core.roperator', 'pandas._libs.ops', 'pandas.core.computation', 'pandas.compat._optional', 'numexpr.interpreter', 'numexpr.expressions', 'numexpr.version', 'numexpr.utils', 'numexpr.necompiler', 'numexpr', 'pandas.core.computation.check', 'pandas.core.computation.expressions', 'pandas.core.ops.missing', 'pandas.core.ops.dispatch', 'pandas.core.ops.invalid', 'pandas.core.ops.array_ops', 'pandas.core.ops.common', 'pandas.core.ops.docstrings', 'pandas.core.ops.mask_ops', 'pandas.core.ops.methods', 'pandas.core.ops', 'pandas.core.arraylike', 'pandas.core.missing', 'pandas.core.array_algos.quantile', 'pandas.core.sorting', 'pandas.core.arrays.base', 'bottleneck.benchmark', 'gc', 'timeit', 'bottleneck.benchmark.autotimeit', 'bottleneck.benchmark.bench', 'bottleneck.benchmark.bench_detailed', 'bottleneck.tests', 'bottleneck.tests.util', 'bottleneck.slow.reduce', 'bottleneck.slow.nonreduce', 'bottleneck.slow.nonreduce_axis', 'bottleneck.slow.move', 'bottleneck.slow', 'bottleneck._pytesttester', 'bottleneck.move', 'bottleneck.nonreduce', 'bottleneck.nonreduce_axis', 'bottleneck.reduce', 'bottleneck._version', 'bottleneck', 'pandas.core.nanops', 'pandas.core.array_algos.masked_reductions', 'pandas.core.arrays.masked', 'pandas.core.arrays.boolean', 'pandas._libs.arrays', 'pandas.core.accessor', 'pandas.core.array_algos.transforms', 'pandas.core.arrays._mixins', 'pandas.core.base', 'pandas.core.strings.accessor', 'pandas.core.strings.base', 'pandas.core.strings', 'unicodedata', 'pandas.core.strings.object_array', 'pandas.io', 'pandas.io.formats', 'pandas.io.formats.console', 'pandas.core.arrays.categorical', 'pandas.tseries', 'pandas.tseries.frequencies', 'pandas.core.arrays.datetimelike', 'pandas.core.arrays._ranges', 'pandas.core.arrays.numeric', 'pandas.core.tools', 'pandas.core.tools.numeric', 'pandas.core.arrays.integer', 'pandas.tseries.offsets', 'pandas.core.arrays.datetimes', 'pandas.core.arrays.floating', 'pandas.core.indexes', 'pandas._libs.index', 'pandas._libs.join', 'pandas.core.array_algos.putmask', 'pandas._libs.sparse', 'pandas.core.arrays.sparse.dtype', 'pandas.io.formats.printing', 'pandas.core.arrays.sparse.array', 'pandas.core.arrays.sparse.accessor', 'pandas.core.arrays.sparse', 'pandas.core.indexes.frozen', 'pandas.core.indexes.base', 'pandas.core.arrays.interval', 'pandas.core.arrays.numpy_', 'pandas.core.arrays.period', 'pandas.core.arrays.string_', 'pandas.core.arrays.string_arrow', 'pandas.core.arrays.timedeltas', 'pandas.core.arrays', 'pandas.core.flags', 'pandas._libs.reduction', 'pandas.core.apply', 'pandas._libs.indexing', 'pandas.core.indexes.extension', 'pandas.core.indexes.category', 'pandas.core.indexes.numeric', 'pandas.core.indexes.range', 'pandas.core.tools.timedeltas', 'pandas.core.indexes.datetimelike', 'pandas.core.tools.times', 'pandas.core.indexes.datetimes', 'pandas.core.indexes.multi', 'pandas.core.indexes.timedeltas', 'pandas.core.indexes.interval', 'pandas.core.indexes.period', 'pandas.core.indexes.api', 'pandas.core.indexing', 'pandas.core.array_algos.replace', 'pandas.core.reshape', 'pandas._libs.internals', 'pandas._libs.writers', 'pandas.core.internals.blocks', 'pandas.core.internals.api', 'pandas.core.internals.base', 'pandas.core.internals.array_manager', 'pandas.core.internals.ops', 'pandas.core.internals.managers', 'pandas.core.internals.concat', 'pandas.core.internals', 'pandas.core.reshape.concat', 'dataclasses', 'gzip', 'mmap', 'pandas.core.shared_docs', 'pandas.io.common', 'pandas.io.formats.format', 'pandas.core.describe', 'pandas.core.internals.construction', 'pandas.core.sample', 'pandas._libs.window', 'pandas._libs.window.aggregations', 'pandas._libs.window.indexers', 'pandas.core.indexers.objects', 'pandas.core.util.numba_', 'pandas.core.window.common', 'pandas.core.window.doc', 'pandas.core.window.numba_', 'pandas.core.window.online', 'pandas.core._numba', 'pandas.core._numba.executor', 'pandas.core.window.rolling', 'pandas.core.window.ewm', 'pandas.core.window.expanding', 'pandas.core.window', 'pandas.core.generic', 'pandas.core.reshape.util', 'pandas.core.reshape.melt', 'pandas._libs.reshape', 'pandas.core.indexes.accessors', 'pandas.arrays', 'pandas.core.tools.datetimes', 'pandas.io.formats.info', 'pandas.plotting._core', 'pandas.plotting._misc', 'pandas.plotting', 'pandas.core.series', 'pandas.core.frame', 'pandas.core.groupby.base', 'pandas._libs.groupby', 'pandas.core.groupby.numba_', 'pandas.core.groupby.categorical', 'pandas.core.groupby.grouper', 'pandas.core.groupby.ops', 'pandas.core.groupby.indexing', 'pandas.core.groupby.groupby', 'pandas.core.groupby.generic', 'pandas.core.groupby', 'pandas.core.api', 'pandas.tseries.api', 'pandas.core.computation.common', 'pandas.core.computation.align', 'pandas.compat.chainmap', 'pandas.core.computation.scope', 'pandas.core.computation.ops', 'pandas.core.computation.parsing', 'pandas.core.computation.expr', 'pandas.core.computation.engines', 'pandas.core.computation.eval', 'pandas.core.computation.api', 'pandas.core.reshape.merge', 'pandas.core.reshape.pivot', 'pandas.core.reshape.reshape', 'pandas.core.reshape.tile', 'pandas.core.reshape.api', 'pandas.api.extensions', 'pandas.api.indexers', 'pandas.core.dtypes.api', 'pandas.api.types', 'pandas.api', 'pandas._testing._random', 'pandas._testing.contexts', 'pandas._testing._io', 'pandas._testing._warnings', 'cmath', 'pandas._libs.testing', 'pandas._testing.asserters', 'pandas._testing.compat', 'pandas._testing', 'pandas.testing', 'pandas.util._print_versions', 'pandas.io.clipboards', 'pandas._libs.parsers', 'pandas.io.excel._util', 'pandas.io.date_converters', 'pandas.io.parsers.base_parser', 'pandas.io.parsers.arrow_parser_wrapper', 'pandas.io.parsers.c_parser_wrapper', 'pandas.io.parsers.python_parser', 'pandas.io.parsers.readers', 'pandas.io.parsers', 'pandas.io.excel._odfreader', 'pandas.io.excel._openpyxl', 'pandas.io.excel._pyxlsb', 'pandas.io.excel._xlrd', 'pandas.io.excel._base', 'pandas._libs.json', 'pandas.io.formats._color_data', 'pandas.io.formats.css', 'pandas.io.formats.excel', 'pandas.io.excel._odswriter', 'pandas.io.excel._xlsxwriter', 'pandas.io.excel._xlwt', 'pandas.io.excel', 'pandas.io.feather_format', 'pandas.io.gbq', 'pandas.io.html', 'pandas.io.json._normalize', 'pandas.io.json._table_schema', 'pandas.io.json._json', 'pandas.io.json', 'pandas.io.orc', 'pandas.io.parquet', 'pandas.compat.pickle_compat', 'pandas.io.pickle', 'pandas.core.computation.pytables', 'pandas.io.pytables', 'pandas.io.sas.sasreader', 'pandas.io.sas', 'pandas.io.spss', 'pandas.io.sql', 'pandas.io.stata', 'pandas.io.xml', 'pandas.io.api', 'pandas.util._tester', 'pandas._version', 'pandas', 'sacred.optional', 'jsonpickle.ext', 'jsonpickle.ext.numpy', 'jsonpickle.ext.pandas', 'sacred.serializer', 'sacred.metrics_logger', 'sacred.randomness', 'sacred.stdout_capturing', 'sacred.run', 'pydoc', 'colorama.ansi', 'colorama.win32', 'colorama.winterm', 'colorama.ansitowin32', 'colorama.initialise', 'colorama', 'sacred.config.config_summary', 'sacred.config.custom_containers', 'sacred.config.utils', 'sacred.config.config_dict', 'sacred.config.signature', 'sacred.config.config_scope', 'sacred.config.config_files', 'sacred.config.captured_function', 'sacred.config', 'sacred.commands', 'sacred.commandline_options', 'sacred.arg_parser', 'sacred.observers.base', 'sacred.dependencies', 'sacred.observers.file_storage', 'mimetypes', 'sacred.observers.queue', 'sacred.observers.mongo', 'sacred.observers.sql', 'sacred.observers.tinydb_hashfs', 'sacred.observers.slack', 'sacred.observers.telegram_obs', 'sacred.observers.s3_observer', 'sacred.observers.gcs_observer', 'sacred.observers', 'sacred.ingredient', 'xml.etree', 'xml.etree.ElementPath', '_elementtree', 'xml.etree.ElementTree', 'multiprocessing.process', 'multiprocessing.reduction', 'multiprocessing.context', '__mp_main__', 'multiprocessing', 'cpuinfo.cpuinfo', 'cpuinfo', 'sacred.host_info', 'sacred.initialize', 'sacred.experiment', 'sacred', 'torch._utils', 'torch._utils_internal', 'torch.version', 'torch.torch_version', 'torch._six', 'torch._C._onnx', 'torch._C._jit', 'torch._C._jit_tree_views', 'torch._C._te', 'torch._C._monitor', 'torch._C.cpp', 'torch._C.cpp.nn', 'torch._C._lazy', 'torch._C._lazy_ts_backend', 'torch._C', 'torch._C._fft', 'torch._C._linalg', 'torch._C._nn', 'torch._C._return_types', 'torch._C._sparse', 'torch._C._special', 'torch._namedtensor_internals', 'torch.utils.throughput_benchmark', 'torch.utils._crash_handler', 'torch.utils', 'torch.utils._mode_utils', 'torch.overrides', 'torch.utils.hooks', 'torch._tensor', 'torch.types', 'torch.storage', 'torch.random', 'difflib', 'tarfile', 'torch._sources', 'torch.serialization', 'torch._tensor_str', 'torch.amp.autocast_mode', 'torch.amp', 'torch.cuda._utils', 'torch.cuda.graphs', 'torch.cuda.streams', 'torch.cuda.memory', 'torch.cuda.random', 'torch.cuda.sparse', 'torch.cuda.profiler', 'torch.cuda.nvtx', 'torch.cuda.amp.autocast_mode', 'torch.cuda.amp.common', 'torch.cuda.amp.grad_scaler', 'torch.cuda.amp', 'torch.cuda.jiterator', 'torch.cuda', 'torch.sparse', 'torch.nn.parameter', 'torch.nn.modules.module', 'torch._VF', 'torch._torch_docs', 'torch._C._distributed_c10d', 'torch.distributed.constants', 'torch.distributed.rendezvous', 'torch.distributed.distributed_c10d', 'torch.distributed.remote_device', 'torch.distributed', 'torch._C._distributed_rpc', 'torch.futures', 'torch.distributed.rpc.internal', 'torch.distributed.rpc.constants', 'torch.distributed.rpc._utils', 'torch.distributed.rpc.api', 'torch.distributed.rpc.backend_registry', 'torch.distributed.rpc.functions', 'torch._C._distributed_autograd', 'torch.distributed.autograd', 'torch.distributed.rpc.options', 'torch.autograd.variable', 'torch.autograd.function', 'torch.testing._comparison', 'torch.testing._creation', 'torch.testing._legacy', 'torch.testing._deprecated', 'torch.testing', 'torch.utils._pytree', 'torch._vmap_internals', 'torch.autograd.gradcheck', 'torch.autograd.grad_mode', 'torch.autograd.anomaly_mode', 'torch.autograd.forward_ad', 'torch.autograd.functional', 'torch.autograd.graph', 'torch._C._autograd', 'torch.autograd.profiler_util', 'torch.autograd.profiler', 'torch.autograd', 'torch.autograd.profiler_legacy', 'torch.distributed.rpc.server_process_global_profiler', 'torch.distributed.rpc', 'pickletools', 'torch.package._digraph', 'torch.package._importlib', 'torch.package._mangling', 'torch.package.importer', 'torch.package._package_pickler', 'torch.package._stdlib', 'torch.package.find_file_dependencies', 'torch.package.glob_group', 'torch.package.package_exporter', 'torch.package.analyze.find_first_use_of_broken_modules', 'torch.package.analyze.trace_dependencies', 'torch.package.analyze', 'torch.package.analyze.is_from_package', 'torch.package.file_structure_representation', 'glob', 'torch.package._directory_reader', 'torch.package._package_unpickler', 'torch.package.package_importer', 'torch.package', 'torch._jit_internal', 'torch.nn._reduction', 'torch.nn.modules.utils', 'torch.nn.grad', 'torch.nn.functional', 'torch.nn.init', 'typing_extensions', 'torch.nn.modules.lazy', 'torch.nn.modules.linear', 'torch.nn.common_types', 'torch.nn.modules.conv', 'torch.nn.modules.activation', 'torch.nn.modules.distance', 'torch.nn.modules.loss', 'torch.nn.modules.container', 'torch.nn.modules.pooling', 'torch.nn.modules._functions', 'torch.nn.modules.batchnorm', 'torch.nn.modules.instancenorm', 'torch.nn.modules.normalization', 'torch.nn.modules.dropout', 'torch.nn.modules.padding', 'torch.nn.modules.sparse', 'torch.nn.utils.rnn', 'torch.nn.utils.clip_grad', 'torch.nn.utils.weight_norm', 'torch.nn.utils.convert_parameters', 'torch.nn.utils.spectral_norm', 'torch.nn.utils.fusion', 'torch.nn.utils.memory_format', 'torch.nn.utils.parametrize', 'torch.nn.utils.parametrizations', 'torch.nn.utils.init', 'torch.nn.utils.stateless', 'torch.nn.utils', 'torch.nn.modules.rnn', 'torch.nn.modules.pixelshuffle', 'torch.nn.modules.upsampling', 'torch.nn.modules.fold', 'torch.nn.modules.adaptive', 'torch.nn.modules.transformer', 'torch.nn.modules.flatten', 'torch.nn.modules.channelshuffle', 'torch.nn.modules', 'torch.nn.parallel.parallel_apply', 'torch.cuda.nccl', 'torch.nn.parallel.comm', 'torch.nn.parallel.replicate', 'torch.nn.parallel._functions', 'torch.nn.parallel.scatter_gather', 'torch.nn.parallel.data_parallel', 'torch.distributed.algorithms.join', 'torch.distributed.algorithms', 'torch.distributed.utils', 'torch.nn.parallel._replicated_tensor_ddp_utils', 'torch.nn.parallel.distributed', 'torch.nn.parallel', 'torch.nn', 'torch._linalg_utils', 'torch._lowrank', 'torch.functional', 'torch.cpu.amp.autocast_mode', 'torch.cpu.amp', 'torch.cpu', 'torch.fft', 'torch.optim.optimizer', 'torch.optim.adadelta', 'torch.optim.adagrad', 'torch.optim.adam', 'torch.optim.adamw', 'torch.optim.adamax', 'torch.optim.asgd', 'torch.optim.nadam', 'torch.optim.radam', 'torch.optim.rmsprop', 'torch.optim.rprop', 'torch.optim.sgd', 'torch.optim._functional', 'torch.optim.sparse_adam', 'torch.optim.lbfgs', 'torch.optim.lr_scheduler', 'torch.optim.swa_utils', 'torch.optim', 'torch.optim._multi_tensor', 'multiprocessing.util', 'multiprocessing.resource_sharer', 'torch.multiprocessing.reductions', '_multiprocessing', 'multiprocessing.connection', 'torch.multiprocessing.spawn', 'torch.multiprocessing', 'torch.special', 'torch.utils.backcompat', 'torch.onnx', 'torch.jit._monkeytype_config', 'torch.jit._state', 'torch._ops', 'torch.jit.annotations', 'torch.jit.frontend', 'torch.backends', 'torch.backends.cudnn', 'torch.jit._builtins', 'torch.jit._check', 'torch.jit._recursive', 'torch.jit._fuser', 'torch.jit._serialization', 'torch._classes', 'torch.jit._script', 'torch.jit._trace', 'torch.jit._async', 'torch.jit._decomposition_utils', 'torch.jit._freeze', 'torch.jit._ir_utils', 'torch.jit', 'torch.linalg', 'urllib.response', 'urllib.error', 'http', '_ssl', 'ssl', 'http.client', '_scproxy', 'urllib.request', 'torch.hub', 'torch.distributions.constraints', 'torch.distributions.utils', 'torch.distributions.distribution', 'torch.distributions.exp_family', 'torch.distributions.bernoulli', 'torch.distributions.dirichlet', 'torch.distributions.beta', 'torch.distributions.binomial', 'torch.distributions.categorical', 'torch.distributions.cauchy', 'torch.distributions.gamma', 'torch.distributions.chi2', 'torch.distributions.transforms', 'torch.distributions.constraint_registry', 'torch.distributions.continuous_bernoulli', 'torch.distributions.exponential', 'torch.distributions.fishersnedecor', 'torch.distributions.geometric', 'torch.distributions.uniform', 'torch.distributions.independent', 'torch.distributions.transformed_distribution', 'torch.distributions.gumbel', 'torch.distributions.half_cauchy', 'torch.distributions.normal', 'torch.distributions.half_normal', 'torch.distributions.laplace', 'torch.distributions.multivariate_normal', 'torch.distributions.lowrank_multivariate_normal', 'torch.distributions.one_hot_categorical', 'torch.distributions.pareto', 'torch.distributions.poisson', 'torch.distributions.kl', 'torch.distributions.kumaraswamy', 'torch.distributions.lkj_cholesky', 'torch.distributions.log_normal', 'torch.distributions.logistic_normal', 'torch.distributions.mixture_same_family', 'torch.distributions.multinomial', 'torch.distributions.negative_binomial', 'torch.distributions.relaxed_bernoulli', 'torch.distributions.relaxed_categorical', 'torch.distributions.studentT', 'torch.distributions.von_mises', 'torch.distributions.weibull', 'torch.distributions.wishart', 'torch.distributions', 'torch.backends.cuda', 'torch.backends.mps', 'torch.backends.mkl', 'torch.backends.mkldnn', 'torch.backends.openmp', 'torch.backends.quantized', 'torch.utils.data.sampler', 'torch.utils.data.dataset', 'torch.utils.data.datapipes._typing', 'torch.utils.data.datapipes.utils', 'torch.utils.data._utils.signal_handling', 'torch.utils.data._utils.worker', 'torch.utils.data._utils.pin_memory', 'torch.utils.data._utils.collate', 'torch.utils.data._utils.fetch', 'torch.utils.data._utils', 'torch.utils.data._utils.serialization', 'torch.utils.data.datapipes.utils.common', 'torch.utils.data.datapipes.datapipe', 'torch.utils.data.datapipes.iter.utils', 'torch.utils.data.datapipes._decorator', 'torch.utils.data.datapipes.iter.callable', 'torch.utils.data.datapipes.iter.combinatorics', 'torch.utils.data.datapipes.iter.combining', 'torch.utils.data.datapipes.iter.filelister', 'torch.utils.data.datapipes.iter.fileopener', 'torch.utils.data.datapipes.iter.grouping', 'torch.utils.data.datapipes.utils.decoder', 'torch.utils.data.datapipes.iter.routeddecoder', 'torch.utils.data.datapipes.dataframe.structures', 'torch.utils.data.datapipes.dataframe.dataframes', 'torch.utils.data.datapipes.dataframe.dataframe_wrapper', 'torch.utils.data.datapipes.dataframe.datapipes', 'torch.utils.data.datapipes.dataframe', 'torch.utils.data.datapipes.iter.selecting', 'torch.utils.data.datapipes.iter.streamreader', 'torch.utils.data.datapipes.iter', 'torch.utils.data.datapipes.map.callable', 'torch.utils.data.datapipes.map.combinatorics', 'torch.utils.data.datapipes.map.combining', 'torch.utils.data.datapipes.map.grouping', 'torch.utils.data.datapipes.map.utils', 'torch.utils.data.datapipes.map', 'torch.utils.data.datapipes', 'torch.utils.data.graph', 'torch.utils.data.graph_settings', 'torch.utils.data.dataloader', 'torch.utils.data.distributed', 'torch.utils.data.backward_compatibility', 'torch.utils.data.communication.eventloop', 'torch.utils.data.communication.iter', 'torch.utils.data.communication.map', 'torch.utils.data.communication.messages', 'torch.utils.data.communication.protocol', 'torch.utils.data.communication.queue', 'torch.utils.data.communication', 'torch.utils.data.dataloader_experimental', 'torch.utils.data', 'torch.__config__', 'torch.__future__', 'torch.profiler.profiler', 'torch.profiler', 'torch.nn.intrinsic.modules.fused', 'torch.nn.intrinsic.modules', 'torch.nn.intrinsic', 'torch.nn.quantized.modules.utils', 'torch.nn.quantized.functional', 'torch.nn.quantized.modules.activation', 'torch.nn.quantized.modules.dropout', 'torch.nn.quantized.modules.batchnorm', 'torch.nn.quantized.modules.normalization', 'torch.nn.qat.modules.linear', 'torch.nn.qat.modules.conv', 'torch.nn.qat.modules.embedding_ops', 'torch.nn.qat.modules', 'torch.nn.qat', 'torch.nn.intrinsic.qat.modules.linear_relu', 'torch.nn.intrinsic.qat.modules.linear_fused', 'torch.nn.intrinsic.qat.modules.conv_fused', 'torch.nn.intrinsic.qat.modules', 'torch.nn.intrinsic.qat', 'torch.nn.quantized.modules.conv', 'torch.nn.quantized.modules.linear', 'torch.nn.quantized.modules.embedding_ops', 'torch.nn.quantized.modules.functional_modules', 'torch.nn.quantized.modules', 'torch.nn.quantized', 'torch.nn.quantizable.modules.activation', 'torch.nn.quantizable.modules.rnn', 'torch.nn.quantizable.modules', 'torch.nn.quantizable', 'torch.ao', 'torch._tensor_docs', 'torch._storage_docs', 'torch.ao.quantization.quant_type', 'torch.ao.quantization.utils', 'torch.ao.quantization.observer', 'torch.ao.quantization.fake_quantize', 'torch.ao.quantization.fuser_method_mappings', 'torch.ao.quantization.fuse_modules', 'torch.ao.quantization.qconfig', 'torch.nn.intrinsic.quantized.modules.linear_relu', 'torch.nn.intrinsic.quantized.modules.conv_relu', 'torch.nn.intrinsic.quantized.modules.bn_relu', 'torch.nn.intrinsic.quantized.modules', 'torch.nn.intrinsic.quantized', 'torch.nn.quantized.dynamic.modules.linear', 'torch.nn.quantized.dynamic.modules.rnn', 'torch.nn.quantized.dynamic.modules.conv', 'torch.nn.quantized.dynamic.modules', 'torch.nn.quantized.dynamic', 'torch.nn.intrinsic.quantized.dynamic.modules.linear_relu', 'torch.nn.intrinsic.quantized.dynamic.modules', 'torch.nn.intrinsic.quantized.dynamic', 'torch.nn.quantized._reference.modules.utils', 'torch.nn.quantized._reference.modules.linear', 'torch.nn.quantized._reference.modules.conv', 'torch.nn.quantized._reference.modules.rnn', 'torch.nn.quantized._reference.modules.sparse', 'torch.nn.quantized._reference.modules', 'torch.nn.quantized._reference', 'torch.nn.qat.dynamic.modules.linear', 'torch.nn.qat.dynamic.modules', 'torch.nn.qat.dynamic', 'torch.ao.nn.sparse.quantized.linear', 'torch.ao.nn.sparse.quantized.utils', 'torch.ao.nn.sparse.quantized.dynamic.linear', 'torch.ao.nn.sparse.quantized.dynamic', 'torch.ao.nn.sparse.quantized', 'torch.ao.nn.sparse', 'torch.ao.nn', 'torch.ao.quantization.stubs', 'torch.ao.quantization.quantization_mappings', 'torch.ao.quantization.quantize', 'torch.ao.quantization.quantize_jit', 'torch.ao.quantization', 'torch.quantization.quantize', 'torch.quantization.observer', 'torch.quantization.qconfig', 'torch.quantization.fake_quantize', 'torch.quantization.fuser_method_mappings', 'torch.quantization.fuse_modules', 'torch.quantization.stubs', 'torch.quantization.quant_type', 'torch.quantization.quantize_jit', 'torch.quantization.quantization_mappings', 'torch.quantization', 'torch.quasirandom', 'torch.multiprocessing._atfork', 'torch._lobpcg', 'torch.utils.dlpack', 'torch._masked._docs', 'torch._masked', 'torch.return_types', 'torch.library', 'torch._prims.utils', 'torch._prims', 'torch._meta_registrations', 'torch', 'utils', 'utils.logging', 'utils.timehelper', 'components', 'components.episode_buffer', 'modules', 'modules.mixers', 'modules.mixers.vdn', 'modules.mixers.qmix', 'components.standarize_stream', 'learners.q_learner', 'modules.critics.coma', 'modules.critics.centralV', 'modules.critics.mlp', 'modules.critics.coma_ns', 'modules.critics.centralV_ns', 'modules.critics.maddpg', 'modules.critics.maddpg_ns', 'modules.critics.ac', 'modules.critics.ac_ns', 'modules.critics', 'utils.rl_utils', 'learners.coma_learner', 'modules.mixers.qtran', 'learners.qtran_learner', 'learners.actor_critic_learner', 'modules.agents.rnn_agent', 'modules.agents.rnn_ns_agent', 'modules.agents', 'components.epsilon_schedules', 'components.action_selectors', 'controllers.basic_controller', 'controllers.non_shared_controller', 'controllers.maddpg_controller', 'controllers', 'learners.maddpg_learner', 'learners.ppo_learner', 'learners', 'gym.error', 'gym.version', 'gym.utils.colorize', 'gym.utils.ezpickle', 'gym.utils', 'gym.utils.closer', 'gym.core', 'gym.utils.seeding', 'gym.spaces.space', 'gym.logger', 'gym.spaces.box', 'gym.spaces.discrete', 'gym.spaces.multi_discrete', 'gym.spaces.multi_binary', 'gym.spaces.tuple', 'gym.spaces.dict', 'gym.spaces.utils', 'gym.spaces', 'gym.envs.registration', 'gym.envs', 'gym.vector.utils.misc', 'gym.vector.utils.spaces', 'gym.vector.utils.numpy_utils', 'gym.vector.utils.shared_memory', 'gym.vector.utils', 'gym.vector.vector_env', 'gym.vector.async_vector_env', 'gym.vector.sync_vector_env', 'gym.vector', 'gym.wrappers.monitoring', 'gym.utils.atomic_write', 'gym.utils.json_utils', 'gym.wrappers.monitoring.stats_recorder', 'setuptools._distutils', 'distutils.debug', 'distutils.errors', 'gettext', 'getopt', 'distutils.fancy_getopt', 'distutils.dep_util', 'distutils.log', 'distutils.spawn', 'distutils.util', 'distutils.dist', 'distutils.dir_util', 'distutils.file_util', 'distutils.archive_util', 'distutils.cmd', 'distutils.config', 'distutils.extension', 'distutils.core', '_distutils_hack.override', 'setuptools._deprecation_warning', 'setuptools.version', 'distutils.filelist', 'setuptools.monkey', 'setuptools.extension', 'distutils.command', 'setuptools.extern', 'setuptools._vendor', 'setuptools._vendor.packaging.__about__', 'setuptools._vendor.packaging', 'setuptools.extern.packaging', 'setuptools._vendor.ordered_set', 'setuptools.extern.ordered_set', 'setuptools._vendor.more_itertools.recipes', 'setuptools._vendor.more_itertools.more', 'setuptools._vendor.more_itertools', 'setuptools.extern.more_itertools', 'setuptools._vendor.zipp', 'setuptools._vendor.importlib_metadata._functools', 'setuptools._vendor.importlib_metadata._text', 'setuptools._vendor.importlib_metadata._adapters', 'setuptools._vendor.importlib_metadata._compat', 'setuptools._vendor.importlib_metadata._meta', 'setuptools._vendor.importlib_metadata._collections', 'setuptools._vendor.importlib_metadata._itertools', 'setuptools._vendor.importlib_metadata', 'setuptools.extern.importlib_metadata', 'setuptools._vendor.importlib_resources._compat', 'setuptools._vendor.importlib_resources.abc', 'setuptools._vendor.importlib_resources._common', 'setuptools._vendor.importlib_resources._legacy', 'setuptools._vendor.importlib_resources', 'setuptools.extern.importlib_resources', 'setuptools._importlib', 'distutils.command.bdist', 'setuptools.command', 'setuptools.windows_support', 'setuptools.extern.packaging._structures', 'setuptools.extern.packaging.version', 'setuptools._vendor.packaging._manylinux', 'setuptools._vendor.packaging._musllinux', 'setuptools.extern.packaging.tags', 'setuptools.extern.packaging.utils', 'setuptools.extern.packaging.specifiers', 'setuptools.config.expand', 'setuptools.config.setupcfg', 'setuptools.config', 'setuptools.errors', 'email._header_value_parser', 'email.headerregistry', 'setuptools.config._apply_pyprojecttoml', 'setuptools.config.pyprojecttoml', 'setuptools.discovery', 'setuptools._vendor.jaraco', 'setuptools.extern.jaraco', 'setuptools.extern.jaraco.functools', 'setuptools.extern.jaraco.context', 'setuptools.extern.jaraco.text', 'setuptools._reqs', 'setuptools._itertools', 'setuptools._entry_points', 'setuptools.dist', 'setuptools.py34compat', 'setuptools._imp', 'setuptools.depends', 'setuptools.logging', 'distutils.ccompiler', 'setuptools.msvc', 'setuptools', 'distutils', 'distutils.version', 'gym.wrappers.monitoring.video_recorder', 'gym.wrappers.monitor', 'gym.wrappers.time_limit', 'gym.wrappers.filter_observation', 'gym.wrappers.atari_preprocessing', 'gym.wrappers.time_aware_observation', 'gym.wrappers.rescale_action', 'gym.wrappers.flatten_observation', 'gym.wrappers.gray_scale_observation', 'gym.wrappers.frame_stack', 'gym.wrappers.transform_observation', 'gym.wrappers.transform_reward', 'gym.wrappers.resize_observation', 'gym.wrappers.clip_action', 'gym.wrappers.record_episode_statistics', 'gym.wrappers.normalize', 'gym.wrappers.record_video', 'gym.wrappers', 'gym', 'pretrained.ddpg', 'pretrained.tag', 'pretrained.adversary', 'pretrained', 'smac', 'smac.env.multiagentenv', 'absl', 'fcntl', 'termios', 'absl.flags._helpers', 'absl.flags._argument_parser', 'absl.flags._exceptions', 'absl.flags._flag', 'xml.dom.domreg', 'xml.dom', 'xml.dom.minicompat', 'xml.dom.NodeFilter', 'xml.dom.xmlbuilder', 'xml.dom.minidom', 'absl.flags._validators_classes', 'absl.flags._flagvalues', 'absl.flags._validators', 'absl.flags._defines', 'absl.flags', 'smac.env.starcraft2', 'pysc2', 'getpass', 'absl.logging.converter', 'absl.logging', 'pysc2.maps.lib', 'pysc2.maps.ladder', 'pysc2.maps.melee', 'pysc2.maps.mini_games', 'pysc2.maps', 'smac.env.starcraft2.maps.smac_maps', 'smac.env.starcraft2.maps', 'pysc2.lib', 'future', 'future.utils', 'future.builtins.iterators', 'future.builtins.misc', 'future.builtins', 'portpicker', 'pysc2.lib.stopwatch', 'websocket._exceptions', 'websocket._utils', 'websocket._abnf', 'http.cookies', 'websocket._cookiejar', 'websocket._logging', 'websocket._ssl_compat', 'websocket._socket', 'six.moves.urllib', 'six.moves.urllib.parse', 'websocket._url', 'websocket._http', 'websocket._handshake', 'websocket._core', 'websocket._app', 'websocket', 's2clientprotocol', 'google.protobuf', 'google.protobuf.internal', 'google.protobuf.internal.enum_type_wrapper', 'google.protobuf.internal.api_implementation', 'google.protobuf.descriptor', 'google.protobuf.message', 'google.protobuf.internal.containers', 'google.protobuf.internal.wire_format', 'google.protobuf.internal.encoder', 'google.protobuf.internal.decoder', 'google.protobuf.internal.message_listener', 'google.protobuf.internal.type_checkers', 'google.protobuf.internal.well_known_types', 'google.protobuf.text_encoding', 'google.protobuf.text_format', 'google.protobuf.internal.python_message', 'google.protobuf.reflection', 'google.protobuf.descriptor_database', 'google.protobuf.descriptor_pool', 'google.protobuf.message_factory', 'google.protobuf.symbol_database', 'google.protobuf.descriptor_pb2', 's2clientprotocol.common_pb2', 's2clientprotocol.data_pb2', 's2clientprotocol.debug_pb2', 's2clientprotocol.error_pb2', 's2clientprotocol.query_pb2', 's2clientprotocol.raw_pb2', 's2clientprotocol.score_pb2', 's2clientprotocol.spatial_pb2', 's2clientprotocol.ui_pb2', 's2clientprotocol.sc2api_pb2', 'pysc2.lib.protocol', 'pysc2.lib.static_data', 'pysc2.lib.remote_controller', 'pysc2.lib.sc_process', 'pysc2.lib.gfile', 'pysc2.run_configs.lib', 'pysc2.run_configs.platforms', 'pysc2.run_configs', 'smac.env.starcraft2.starcraft2', 'smac.env', 'envs', 'runners.episode_runner', 'runners.parallel_runner', 'runners', 'components.transforms', 'run', 'smmap.util', 'smmap.mman', 'smmap.buf', 'smmap', 'gitdb.const', 'gitdb.util', 'gitdb.utils', 'gitdb.utils.encoding', 'gitdb.typ', 'gitdb.fun', 'gitdb.base', 'gitdb.exc', 'gitdb.db.base', 'gitdb.stream', 'gitdb.db.loose', 'gitdb.db.mem', 'gitdb.pack', 'gitdb.db.pack', 'gitdb.db.ref', 'gitdb.db.git', 'gitdb.db', 'gitdb', 'git.compat', 'git.types', 'git.exc', 'git.util', 'git.config', 'git.objects.util', 'git.objects.base', 'git.objects.blob', 'git.cmd', 'git.diff', 'git.objects.submodule', 'git.objects.submodule.util', 'git.objects.submodule.base', 'git.objects.fun', 'git.objects.tree', 'git.objects.commit', 'git.objects.submodule.root', 'git.objects.tag', 'git.objects', 'git.refs.log', 'git.refs.symbolic', 'git.refs.reference', 'git.refs.head', 'git.refs.tag', 'git.refs.remote', 'git.refs', 'git.db', 'git.index.util', 'git.index.typ', 'git.index.fun', 'git.index.base', 'git.index', 'git.remote', 'git.repo.fun', 'git.repo.base', 'git.repo', 'git', 'mpe', 'imp', 'mpe.scenarios', 'mpe.core', 'mpe.scenario', '', 'seaborn', 'seaborn.rcmod', 'matplotlib', 'matplotlib._api.deprecation', 'matplotlib._api', 'matplotlib._version', 'matplotlib._c_internal_utils', 'matplotlib.cbook', 'matplotlib.docstring', 'PIL._version', 'PIL', 'PIL.ImageMode', 'PIL.TiffTags', 'PIL._binary', 'PIL._deprecate', 'PIL._util', 'PIL._imaging', 'PIL.Image', 'PIL.ImageChops', 'PIL.ImageFile', 'PIL.GimpGradientFile', 'PIL.GimpPaletteFile', 'PIL.ImageColor', 'PIL.PaletteFile', 'PIL.ImagePalette', 'PIL.ImageSequence', 'PIL.PngImagePlugin', 'matplotlib._path', 'matplotlib.bezier', 'matplotlib.path', 'matplotlib.transforms', 'matplotlib.ticker', 'matplotlib.scale', 'matplotlib._color_data', 'matplotlib.colors', 'pyparsing.util', 'pyparsing.unicode', 'pyparsing.exceptions', 'pyparsing.actions', 'pyparsing.results', 'pyparsing.core', 'pyparsing.helpers', 'pyparsing.testing', 'pyparsing.common', 'pyparsing', 'matplotlib.fontconfig_pattern', 'matplotlib._enums', 'cycler', 'matplotlib.rcsetup', 'matplotlib.ft2font', 'kiwisolver._cext', 'kiwisolver']
+/Users/danieltabas/opt/anaconda3/envs/MARL_env/lib/python3.8/site-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.16.5 and <1.23.0 is required for this version of SciPy (detected version 1.23.1
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+[DEBUG 15:53:07] matplotlib CACHEDIR=/Users/danieltabas/.matplotlib
+[DEBUG 15:53:07] matplotlib.font_manager Using fontManager instance from /Users/danieltabas/.matplotlib/fontlist-v330.json
+[INFO 15:53:07] my_main Beginning training for 2050000 timesteps
+/Users/danieltabas/Documents/GitHub/epymarl/src/components/episode_buffer.py:103: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at  /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_new.cpp:204.)
+  v = th.tensor(v, dtype=dtype, device=self.device)
+/Users/danieltabas/Documents/GitHub/epymarl/src/components/episode_buffer.py:103: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  v = th.tensor(v, dtype=dtype, device=self.device)
+[INFO 15:53:07] my_main t_env: 25 / 2050000
+[INFO 15:53:07] my_main Estimated time left: 2 seconds. Time passed: 0 seconds
+[INFO 15:54:10] my_main Recent Stats | t_env:      50000 | Episode:     2000
+ep_length_mean:           25.0000	epsilon:                   0.2400	grad_norm:                 6.8707	loss:                      1.2252
+q_taken_mean:              1.6679	return_mean:             -20.2444	return_std:               16.4987	target_mean:               2.0701
+td_error_abs:              0.8453	test_ep_length_mean:      25.0000	test_return_mean:        -41.3244	test_return_std:          26.5756
+
+[INFO 15:54:10] my_main t_env: 50025 / 2050000
+[INFO 15:54:10] my_main Estimated time left: 42 minutes, 0 seconds. Time passed: 1 minutes, 3 seconds
+[INFO 15:55:12] my_main Recent Stats | t_env:     100000 | Episode:     4000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 9.4805	loss:                      2.5325
+q_taken_mean:              7.2707	return_mean:              -7.6861	return_std:                7.2736	target_mean:               7.5903
+td_error_abs:              0.8935	test_ep_length_mean:      25.0000	test_return_mean:        -23.6887	test_return_std:          16.1632
+
+[INFO 15:55:12] my_main t_env: 100025 / 2050000
+[INFO 15:55:12] my_main Estimated time left: 40 minutes, 14 seconds. Time passed: 2 minutes, 4 seconds
+[INFO 15:56:14] my_main Recent Stats | t_env:     150000 | Episode:     6000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 5.8448	loss:                      3.5627
+q_taken_mean:              9.5295	return_mean:             -10.8273	return_std:                6.8779	target_mean:               9.6400
+td_error_abs:              0.8509	test_ep_length_mean:      25.0000	test_return_mean:        -18.5896	test_return_std:          12.8300
+
+[INFO 15:56:14] my_main t_env: 150025 / 2050000
+[INFO 15:56:14] my_main Estimated time left: 39 minutes, 23 seconds. Time passed: 3 minutes, 7 seconds
+[INFO 15:57:17] my_main Recent Stats | t_env:     200000 | Episode:     8000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 3.7285	loss:                      3.9036
+q_taken_mean:             10.4197	return_mean:             -10.4224	return_std:                9.3772	target_mean:              10.4091
+td_error_abs:              0.8040	test_ep_length_mean:      25.0000	test_return_mean:        -16.2930	test_return_std:          11.3736
+
+[INFO 15:57:17] my_main t_env: 200025 / 2050000
+[INFO 15:57:17] my_main Estimated time left: 38 minutes, 22 seconds. Time passed: 4 minutes, 9 seconds
+[INFO 15:58:19] my_main Recent Stats | t_env:     250000 | Episode:    10000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                33.7757	loss:                      5.1565
+q_taken_mean:              9.2276	return_mean:              -9.7995	return_std:                6.8855	target_mean:               9.2181
+td_error_abs:              0.7759	test_ep_length_mean:      25.0000	test_return_mean:        -14.8435	test_return_std:          10.3655
+
+[INFO 15:58:19] my_main t_env: 250025 / 2050000
+[INFO 15:58:19] my_main Estimated time left: 37 minutes, 22 seconds. Time passed: 5 minutes, 11 seconds
+[INFO 15:59:22] my_main Recent Stats | t_env:     300000 | Episode:    12000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 3.8447	loss:                      2.7002
+q_taken_mean:              8.8200	return_mean:              -9.3959	return_std:                7.3415	target_mean:               8.7434
+td_error_abs:              0.6483	test_ep_length_mean:      25.0000	test_return_mean:         -8.2693	test_return_std:           6.2926
+
+[INFO 15:59:22] my_main t_env: 300025 / 2050000
+[INFO 15:59:22] my_main Estimated time left: 36 minutes, 32 seconds. Time passed: 6 minutes, 14 seconds
+[INFO 16:00:25] my_main Recent Stats | t_env:     350000 | Episode:    14000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 2.3976	loss:                      2.5395
+q_taken_mean:              8.3207	return_mean:              -8.9745	return_std:                7.1307	target_mean:               8.2949
+td_error_abs:              0.6529	test_ep_length_mean:      25.0000	test_return_mean:         -8.6860	test_return_std:           6.4452
+
+[INFO 16:00:25] my_main t_env: 350025 / 2050000
+[INFO 16:00:25] my_main Estimated time left: 35 minutes, 56 seconds. Time passed: 7 minutes, 17 seconds
+[INFO 16:01:31] my_main Recent Stats | t_env:     400000 | Episode:    16000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 2.6460	loss:                      2.5245
+q_taken_mean:              8.2684	return_mean:              -8.3906	return_std:                7.1660	target_mean:               8.2645
+td_error_abs:              0.6565	test_ep_length_mean:      25.0000	test_return_mean:         -9.0635	test_return_std:           6.5943
+
+[INFO 16:01:32] my_main t_env: 400025 / 2050000
+[INFO 16:01:32] my_main Estimated time left: 36 minutes, 34 seconds. Time passed: 8 minutes, 24 seconds
+[INFO 16:02:37] my_main Recent Stats | t_env:     450000 | Episode:    18000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 2.8602	loss:                      2.5183
+q_taken_mean:              8.3736	return_mean:              -8.6756	return_std:                6.6728	target_mean:               8.3798
+td_error_abs:              0.6634	test_ep_length_mean:      25.0000	test_return_mean:         -9.0948	test_return_std:           6.7301
+
+[INFO 16:02:37] my_main t_env: 450025 / 2050000
+[INFO 16:02:37] my_main Estimated time left: 34 minutes, 52 seconds. Time passed: 9 minutes, 29 seconds
+[INFO 16:03:45] my_main Recent Stats | t_env:     500000 | Episode:    20000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 3.0442	loss:                      2.3572
+q_taken_mean:              8.2575	return_mean:              -9.1945	return_std:                6.6401	target_mean:               8.2042
+td_error_abs:              0.6092	test_ep_length_mean:      25.0000	test_return_mean:         -8.9181	test_return_std:           6.4739
+
+[INFO 16:03:45] my_main t_env: 500025 / 2050000
+[INFO 16:03:45] my_main Estimated time left: 35 minutes, 4 seconds. Time passed: 10 minutes, 37 seconds
+[INFO 16:04:53] my_main Recent Stats | t_env:     550000 | Episode:    22000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 2.6123	loss:                      2.3158
+q_taken_mean:              7.9985	return_mean:              -9.5643	return_std:                6.6969	target_mean:               7.9709
+td_error_abs:              0.6239	test_ep_length_mean:      25.0000	test_return_mean:         -9.4085	test_return_std:           6.7676
+
+[INFO 16:04:53] my_main t_env: 550025 / 2050000
+[INFO 16:04:53] my_main Estimated time left: 34 minutes, 2 seconds. Time passed: 11 minutes, 45 seconds
+[INFO 16:06:00] my_main Recent Stats | t_env:     600000 | Episode:    24000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 1.8862	loss:                      2.1321
+q_taken_mean:              7.8136	return_mean:              -8.8005	return_std:                7.1224	target_mean:               7.7985
+td_error_abs:              0.6070	test_ep_length_mean:      25.0000	test_return_mean:         -9.4614	test_return_std:           6.5734
+
+[INFO 16:06:00] my_main t_env: 600025 / 2050000
+[INFO 16:06:00] my_main Estimated time left: 32 minutes, 13 seconds. Time passed: 12 minutes, 52 seconds
+[INFO 16:07:08] my_main Recent Stats | t_env:     650000 | Episode:    26000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 2.3157	loss:                      2.0318
+q_taken_mean:              7.3299	return_mean:              -8.5022	return_std:                7.2293	target_mean:               7.3131
+td_error_abs:              0.5923	test_ep_length_mean:      25.0000	test_return_mean:         -8.9712	test_return_std:           6.3181
+
+[INFO 16:07:08] my_main t_env: 650025 / 2050000
+[INFO 16:07:08] my_main Estimated time left: 31 minutes, 47 seconds. Time passed: 14 minutes, 0 seconds
+[INFO 16:08:16] my_main Recent Stats | t_env:     700000 | Episode:    28000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 1.8195	loss:                      1.9460
+q_taken_mean:              7.5456	return_mean:              -8.4496	return_std:                7.1649	target_mean:               7.5455
+td_error_abs:              0.5825	test_ep_length_mean:      25.0000	test_return_mean:         -8.8640	test_return_std:           6.2154
+
+[INFO 16:08:16] my_main t_env: 700025 / 2050000
+[INFO 16:08:16] my_main Estimated time left: 30 minutes, 32 seconds. Time passed: 15 minutes, 8 seconds
+[INFO 16:09:23] my_main Recent Stats | t_env:     750000 | Episode:    30000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 2.0835	loss:                      2.0090
+q_taken_mean:              7.2904	return_mean:              -8.9014	return_std:                7.3306	target_mean:               7.2665
+td_error_abs:              0.5833	test_ep_length_mean:      25.0000	test_return_mean:         -8.8611	test_return_std:           6.5868
+
+[INFO 16:09:23] my_main t_env: 750025 / 2050000
+[INFO 16:09:23] my_main Estimated time left: 29 minutes, 12 seconds. Time passed: 16 minutes, 15 seconds
+[INFO 16:10:28] my_main Recent Stats | t_env:     800000 | Episode:    32000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 2.5794	loss:                      2.0607
+q_taken_mean:              7.3380	return_mean:              -9.3869	return_std:                7.2374	target_mean:               7.3095
+td_error_abs:              0.5901	test_ep_length_mean:      25.0000	test_return_mean:         -8.4283	test_return_std:           6.1396
+
+[INFO 16:10:28] my_main t_env: 800025 / 2050000
+[INFO 16:10:28] my_main Estimated time left: 27 minutes, 16 seconds. Time passed: 17 minutes, 21 seconds
+[INFO 16:11:34] my_main Recent Stats | t_env:     850000 | Episode:    34000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 1.7920	loss:                      1.8923
+q_taken_mean:              7.0796	return_mean:              -7.7837	return_std:                7.4460	target_mean:               7.0757
+td_error_abs:              0.5762	test_ep_length_mean:      25.0000	test_return_mean:         -8.2495	test_return_std:           6.3723
+
+[INFO 16:11:34] my_main t_env: 850025 / 2050000
+[INFO 16:11:34] my_main Estimated time left: 26 minutes, 18 seconds. Time passed: 18 minutes, 26 seconds
+[INFO 16:12:39] my_main Recent Stats | t_env:     900000 | Episode:    36000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 2.1956	loss:                      2.0927
+q_taken_mean:              7.5848	return_mean:              -8.8407	return_std:                6.9314	target_mean:               7.5708
+td_error_abs:              0.6047	test_ep_length_mean:      25.0000	test_return_mean:         -8.2095	test_return_std:           6.5458
+
+[INFO 16:12:39] my_main t_env: 900025 / 2050000
+[INFO 16:12:39] my_main Estimated time left: 24 minutes, 47 seconds. Time passed: 19 minutes, 31 seconds
+[INFO 16:13:46] my_main Recent Stats | t_env:     950000 | Episode:    38000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 2.7047	loss:                      2.0886
+q_taken_mean:              7.5506	return_mean:              -9.3082	return_std:                6.6944	target_mean:               7.5913
+td_error_abs:              0.6543	test_ep_length_mean:      25.0000	test_return_mean:         -7.9675	test_return_std:           6.2846
+
+[INFO 16:13:46] my_main t_env: 950025 / 2050000
+[INFO 16:13:46] my_main Estimated time left: 24 minutes, 31 seconds. Time passed: 20 minutes, 38 seconds
+[INFO 16:14:54] my_main Recent Stats | t_env:    1000000 | Episode:    40000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 2.3823	loss:                      1.9856
+q_taken_mean:              7.2523	return_mean:              -8.5545	return_std:                7.2420	target_mean:               7.2544
+td_error_abs:              0.6019	test_ep_length_mean:      25.0000	test_return_mean:         -7.8474	test_return_std:           6.2883
+
+[INFO 16:14:54] my_main t_env: 1000025 / 2050000
+[INFO 16:14:54] my_main Estimated time left: 23 minutes, 43 seconds. Time passed: 21 minutes, 46 seconds
+[INFO 16:16:00] my_main Recent Stats | t_env:    1050000 | Episode:    42000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 1.9923	loss:                      1.8963
+q_taken_mean:              7.1189	return_mean:              -7.9742	return_std:                6.9344	target_mean:               7.0995
+td_error_abs:              0.5722	test_ep_length_mean:      25.0000	test_return_mean:         -7.6140	test_return_std:           6.5569
+
+[INFO 16:16:00] my_main t_env: 1050025 / 2050000
+[INFO 16:16:00] my_main Estimated time left: 21 minutes, 59 seconds. Time passed: 22 minutes, 52 seconds
+[INFO 16:17:09] my_main Recent Stats | t_env:    1100000 | Episode:    44000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 1.6361	loss:                      1.7760
+q_taken_mean:              7.0202	return_mean:              -7.8361	return_std:                6.7883	target_mean:               7.0393
+td_error_abs:              0.5718	test_ep_length_mean:      25.0000	test_return_mean:         -7.6309	test_return_std:           6.6984
+
+[INFO 16:17:09] my_main t_env: 1100025 / 2050000
+[INFO 16:17:09] my_main Estimated time left: 21 minutes, 56 seconds. Time passed: 24 minutes, 1 seconds
+[INFO 16:18:18] my_main Recent Stats | t_env:    1150000 | Episode:    46000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 1.7755	loss:                      1.7840
+q_taken_mean:              6.9920	return_mean:              -8.4409	return_std:                7.3859	target_mean:               6.9949
+td_error_abs:              0.5663	test_ep_length_mean:      25.0000	test_return_mean:         -7.6211	test_return_std:           6.7108
+
+[INFO 16:18:18] my_main t_env: 1150025 / 2050000
+[INFO 16:18:18] my_main Estimated time left: 20 minutes, 40 seconds. Time passed: 25 minutes, 10 seconds
+[INFO 16:19:25] my_main Recent Stats | t_env:    1200000 | Episode:    48000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 2.0338	loss:                      1.7456
+q_taken_mean:              6.9492	return_mean:              -8.8235	return_std:                7.3502	target_mean:               6.9498
+td_error_abs:              0.5604	test_ep_length_mean:      25.0000	test_return_mean:         -7.6895	test_return_std:           6.7408
+
+[INFO 16:19:25] my_main t_env: 1200025 / 2050000
+[INFO 16:19:25] my_main Estimated time left: 18 minutes, 58 seconds. Time passed: 26 minutes, 17 seconds
+[INFO 16:20:31] my_main Recent Stats | t_env:    1250000 | Episode:    50000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 1.8026	loss:                      1.7384
+q_taken_mean:              6.8200	return_mean:              -8.0726	return_std:                7.1327	target_mean:               6.8059
+td_error_abs:              0.5534	test_ep_length_mean:      25.0000	test_return_mean:         -7.6669	test_return_std:           6.6978
+
+[INFO 16:20:31] my_main t_env: 1250025 / 2050000
+[INFO 16:20:31] my_main Estimated time left: 17 minutes, 46 seconds. Time passed: 27 minutes, 24 seconds
+[INFO 16:21:40] my_main Recent Stats | t_env:    1300000 | Episode:    52000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 1.6737	loss:                      1.6737
+q_taken_mean:              6.7376	return_mean:              -8.2171	return_std:                6.8421	target_mean:               6.7319
+td_error_abs:              0.5455	test_ep_length_mean:      25.0000	test_return_mean:         -7.6249	test_return_std:           6.3751
+
+[INFO 16:21:40] my_main t_env: 1300025 / 2050000
+[INFO 16:21:40] my_main Estimated time left: 17 minutes, 16 seconds. Time passed: 28 minutes, 33 seconds
+[INFO 16:22:51] my_main Recent Stats | t_env:    1350000 | Episode:    54000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 1.7036	loss:                      1.6419
+q_taken_mean:              6.7696	return_mean:              -7.7085	return_std:                7.0644	target_mean:               6.7841
+td_error_abs:              0.5467	test_ep_length_mean:      25.0000	test_return_mean:         -7.2879	test_return_std:           5.9969
+
+[INFO 16:22:51] my_main t_env: 1350025 / 2050000
+[INFO 16:22:51] my_main Estimated time left: 16 minutes, 28 seconds. Time passed: 29 minutes, 43 seconds
+[INFO 16:24:04] my_main Recent Stats | t_env:    1400000 | Episode:    56000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 2.2639	loss:                      1.9049
+q_taken_mean:              6.9901	return_mean:              -8.4680	return_std:                6.8302	target_mean:               7.0365
+td_error_abs:              0.6089	test_ep_length_mean:      25.0000	test_return_mean:         -7.6222	test_return_std:           6.3860
+
+[INFO 16:24:04] my_main t_env: 1400025 / 2050000
+[INFO 16:24:04] my_main Estimated time left: 15 minutes, 47 seconds. Time passed: 30 minutes, 56 seconds
+[INFO 16:25:17] my_main Recent Stats | t_env:    1450000 | Episode:    58000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 2.2559	loss:                      2.1101
+q_taken_mean:              7.4484	return_mean:              -7.3892	return_std:                7.3040	target_mean:               7.4790
+td_error_abs:              0.6275	test_ep_length_mean:      25.0000	test_return_mean:         -7.5675	test_return_std:           6.8010
+
+[INFO 16:25:17] my_main t_env: 1450025 / 2050000
+[INFO 16:25:17] my_main Estimated time left: 14 minutes, 31 seconds. Time passed: 32 minutes, 9 seconds
+[INFO 16:26:27] my_main Recent Stats | t_env:    1500000 | Episode:    60000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 2.2131	loss:                      2.1201
+q_taken_mean:              7.4014	return_mean:              -7.7112	return_std:                6.7317	target_mean:               7.4055
+td_error_abs:              0.6154	test_ep_length_mean:      25.0000	test_return_mean:         -7.3346	test_return_std:           6.3309
+
+[INFO 16:26:27] my_main t_env: 1500025 / 2050000
+[INFO 16:26:27] my_main Estimated time left: 12 minutes, 52 seconds. Time passed: 33 minutes, 19 seconds
+[INFO 16:27:38] my_main Recent Stats | t_env:    1550000 | Episode:    62000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 2.2116	loss:                      2.0971
+q_taken_mean:              7.6325	return_mean:              -8.1598	return_std:                6.9866	target_mean:               7.5925
+td_error_abs:              0.5834	test_ep_length_mean:      25.0000	test_return_mean:         -7.3084	test_return_std:           6.4187
+
+[INFO 16:27:38] my_main t_env: 1550025 / 2050000
+[INFO 16:27:38] my_main Estimated time left: 11 minutes, 47 seconds. Time passed: 34 minutes, 30 seconds
+[INFO 16:28:50] my_main Recent Stats | t_env:    1600000 | Episode:    64000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 1.8724	loss:                      2.0571
+q_taken_mean:              7.3767	return_mean:              -8.6039	return_std:                7.2741	target_mean:               7.3510
+td_error_abs:              0.5912	test_ep_length_mean:      25.0000	test_return_mean:         -7.9769	test_return_std:           6.4978
+
+[INFO 16:28:50] my_main t_env: 1600025 / 2050000
+[INFO 16:28:50] my_main Estimated time left: 10 minutes, 56 seconds. Time passed: 35 minutes, 43 seconds
+[INFO 16:30:04] my_main Recent Stats | t_env:    1650000 | Episode:    66000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 2.1458	loss:                      1.9009
+q_taken_mean:              7.0513	return_mean:              -7.9359	return_std:                6.9971	target_mean:               7.0167
+td_error_abs:              0.5653	test_ep_length_mean:      25.0000	test_return_mean:         -7.4678	test_return_std:           5.8418
+
+[INFO 16:30:04] my_main t_env: 1650025 / 2050000
+[INFO 16:30:04] my_main Estimated time left: 9 minutes, 50 seconds. Time passed: 36 minutes, 57 seconds
+[INFO 16:31:17] my_main Recent Stats | t_env:    1700000 | Episode:    68000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 1.6721	loss:                      1.9010
+q_taken_mean:              7.1831	return_mean:              -7.4479	return_std:                7.3099	target_mean:               7.1778
+td_error_abs:              0.5736	test_ep_length_mean:      25.0000	test_return_mean:         -7.3472	test_return_std:           5.4702
+
+[INFO 16:31:17] my_main t_env: 1700025 / 2050000
+[INFO 16:31:17] my_main Estimated time left: 8 minutes, 31 seconds. Time passed: 38 minutes, 10 seconds
+[INFO 16:32:30] my_main Recent Stats | t_env:    1750000 | Episode:    70000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 2.2911	loss:                      2.0442
+q_taken_mean:              7.2843	return_mean:              -8.1482	return_std:                7.1200	target_mean:               7.3066
+td_error_abs:              0.6219	test_ep_length_mean:      25.0000	test_return_mean:         -7.4350	test_return_std:           6.0149
+
+[INFO 16:32:30] my_main t_env: 1750025 / 2050000
+[INFO 16:32:30] my_main Estimated time left: 7 minutes, 16 seconds. Time passed: 39 minutes, 22 seconds
+[INFO 16:33:43] my_main Recent Stats | t_env:    1800000 | Episode:    72000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 2.5471	loss:                      2.2345
+q_taken_mean:              7.5954	return_mean:              -8.1457	return_std:                7.3270	target_mean:               7.6209
+td_error_abs:              0.6535	test_ep_length_mean:      25.0000	test_return_mean:         -7.5230	test_return_std:           6.1298
+
+[INFO 16:33:43] my_main t_env: 1800025 / 2050000
+[INFO 16:33:43] my_main Estimated time left: 6 minutes, 4 seconds. Time passed: 40 minutes, 35 seconds
+[INFO 16:34:55] my_main Recent Stats | t_env:    1850000 | Episode:    74000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 2.2785	loss:                      2.0879
+q_taken_mean:              7.3802	return_mean:              -8.4002	return_std:                7.1084	target_mean:               7.3341
+td_error_abs:              0.5745	test_ep_length_mean:      25.0000	test_return_mean:         -7.2114	test_return_std:           6.4799
+
+[INFO 16:34:55] my_main t_env: 1850025 / 2050000
+[INFO 16:34:55] my_main Estimated time left: 4 minutes, 48 seconds. Time passed: 41 minutes, 48 seconds
+[INFO 16:36:09] my_main Recent Stats | t_env:    1900000 | Episode:    76000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 2.5671	loss:                      1.8759
+q_taken_mean:              7.2283	return_mean:              -8.3790	return_std:                7.2984	target_mean:               7.1733
+td_error_abs:              0.5452	test_ep_length_mean:      25.0000	test_return_mean:         -7.6588	test_return_std:           6.8527
+
+[INFO 16:36:09] my_main t_env: 1900025 / 2050000
+[INFO 16:36:09] my_main Estimated time left: 3 minutes, 40 seconds. Time passed: 43 minutes, 1 seconds
+[INFO 16:37:18] my_main Recent Stats | t_env:    1950000 | Episode:    78000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 1.7890	loss:                      1.7219
+q_taken_mean:              6.6207	return_mean:              -8.5814	return_std:                6.8835	target_mean:               6.6228
+td_error_abs:              0.5737	test_ep_length_mean:      25.0000	test_return_mean:         -7.6659	test_return_std:           6.7179
+
+[INFO 16:37:18] my_main t_env: 1950025 / 2050000
+[INFO 16:37:18] my_main Estimated time left: 2 minutes, 18 seconds. Time passed: 44 minutes, 10 seconds
+[INFO 16:38:25] my_main Recent Stats | t_env:    2000000 | Episode:    80000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 1.6690	loss:                      1.7772
+q_taken_mean:              6.7412	return_mean:              -8.1053	return_std:                7.0614	target_mean:               6.7191
+td_error_abs:              0.5555	test_ep_length_mean:      25.0000	test_return_mean:         -7.7326	test_return_std:           6.7076
+
+[INFO 16:38:25] my_main t_env: 2000025 / 2050000
+[INFO 16:38:25] my_main Estimated time left: 1 minutes, 7 seconds. Time passed: 45 minutes, 18 seconds
+[INFO 16:39:36] my_main Recent Stats | t_env:    2050000 | Episode:    82000
+ep_length_mean:           25.0000	epsilon:                   0.0500	grad_norm:                 1.6630	loss:                      1.7718
+q_taken_mean:              6.8680	return_mean:              -8.5345	return_std:                6.6333	target_mean:               6.8729
+td_error_abs:              0.5624	test_ep_length_mean:      25.0000	test_return_mean:         -8.0954	test_return_std:           7.0910
+
+[INFO 16:39:36] my_main t_env: 2050025 / 2050000
+[INFO 16:39:36] my_main Estimated time left: -. Time passed: 46 minutes, 28 seconds
+[INFO 16:39:37] my_main Finished Training
+Exiting Main
+Stopping all threads
+Thread Thread-1 is alive! Is daemon: False
+Thread joined
+Exiting script
+[DEBUG 16:39:38] my_main Finished after 0:46:33.
