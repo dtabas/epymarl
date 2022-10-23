@@ -49,7 +49,7 @@ class EpisodeRunner:
         self.reset()
 
         terminated = False
-        episode_return = 0
+        episode_return = np.array([0.]*self.env.n_agents)
         self.mac.init_hidden(batch_size=self.batch_size)
 
         while not terminated:

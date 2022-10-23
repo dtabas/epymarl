@@ -41,7 +41,7 @@ class MADDPGLearner:
         rewards = batch["reward"][:, :-1]
         actions = batch["actions_onehot"]
         terminated = batch["terminated"][:, :-1].float()
-        rewards = rewards.unsqueeze(2).expand(-1, -1, self.n_agents, -1)
+        rewards = rewards.unsqueeze(2)#.expand(-1, -1, self.n_agents, -1)
         terminated = terminated.unsqueeze(2).expand(-1, -1, self.n_agents, -1)
         mask = 1 - terminated
         batch_size = batch.batch_size

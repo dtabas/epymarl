@@ -102,7 +102,7 @@ def run_sequential(args, logger):
             "group": "agents",
             "dtype": th.int,
         },
-        "reward": {"vshape": (1,), "group": "agents"},
+        "reward": {"vshape": (), "group": "agents"},
         "terminated": {"vshape": (1,), "dtype": th.uint8},
     }
     groups = {"agents": args.n_agents}
