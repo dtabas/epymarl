@@ -66,19 +66,24 @@ class EpisodeRunner:
             # Receive the actions for each agent at this timestep in a batch of size 1
             actions = self.mac.select_actions(self.batch, t_ep=self.t, t_env=self.t_env, test_mode=test_mode)
 
-            reward, terminated, env_info = self.env.step(actions[0])
+            lam = 1
+            reward_cost, terminated, env_info = self.env.step(actions[0])
+            reward = [r - np.dot(lam,c) for r,c in reward_cost]
+            cost = [c for r,c in reward_cost]
+            cost = cost[0] # costs are the same for each agent
             episode_return += reward
 
             post_transition_data = {
                 "actions": actions,
                 "reward": [(reward,)],
+                "cost": [(cost,)],
                 "terminated": [(terminated != env_info.get("episode_limit", False),)],
             }
 
             self.batch.update(post_transition_data, ts=self.t)
             
-            #if self.train_stats.get("n_episodes", 0) % 200 == 0:
-            #    self.env.render()
+            if self.train_stats.get("n_episodes", 0) % 200 == 0:
+                self.env.render()
             
             self.t += 1
 

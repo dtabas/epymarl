@@ -90,6 +90,7 @@ def run_sequential(args, logger):
     env_info = runner.get_env_info()
     args.n_agents = env_info["n_agents"]
     args.n_actions = env_info["n_actions"]
+    args.n_constraints = env_info["n_constraints"]
     args.state_shape = env_info["state_shape"]
 
     # Default/Base scheme
@@ -103,6 +104,7 @@ def run_sequential(args, logger):
             "dtype": th.int,
         },
         "reward": {"vshape": (), "group": "agents"},
+        "cost": {"vshape": (args.n_constraints,)},
         "terminated": {"vshape": (1,), "dtype": th.uint8},
     }
     groups = {"agents": args.n_agents}

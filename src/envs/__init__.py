@@ -85,6 +85,7 @@ class _GymmaWrapper(MultiAgentEnv):
             self._env = getattr(pretrained, pretrained_wrapper)(self._env)
 
         self.n_agents = self._env.n_agents
+        self.n_constraints = self._env.n_constraints
         self._obs = None
 
         self.longest_action_space = max(self._env.action_space, key=lambda x: x.n)
@@ -191,6 +192,15 @@ class _GymmaWrapper(MultiAgentEnv):
 
     def get_stats(self):
         return {}
+        
+    def get_env_info(self):
+        env_info = {"state_shape": self.get_state_size(),
+                    "obs_shape": self.get_obs_size(),
+                    "n_actions": self.get_total_actions(),
+                    "n_agents": self.n_agents,
+                    "n_constraints": self.n_constraints,
+                    "episode_limit": self.episode_limit}
+        return env_info
 
 
 REGISTRY["gymma"] = partial(env_fn, env=_GymmaWrapper)
