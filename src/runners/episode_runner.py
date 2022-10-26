@@ -22,6 +22,10 @@ class EpisodeRunner:
         self.test_returns = []
         self.train_stats = {}
         self.test_stats = {}
+        
+        self.lam_init = 0
+        self.lam = np.ones(self.env.n_constraints)* self.lam_init
+        self.lam_max = 10
 
         # Log the first run
         self.log_train_stats_t = -1000000
@@ -66,9 +70,8 @@ class EpisodeRunner:
             # Receive the actions for each agent at this timestep in a batch of size 1
             actions = self.mac.select_actions(self.batch, t_ep=self.t, t_env=self.t_env, test_mode=test_mode)
 
-            lam = 1
             reward_cost, terminated, env_info = self.env.step(actions[0])
-            reward = [r - np.dot(lam,c) for r,c in reward_cost]
+            reward = np.array([r - np.dot(self.lam,c) for r,c in reward_cost]).flatten()
             cost = [c for r,c in reward_cost]
             cost = cost[0] # costs are the same for each agent
             episode_return += reward
@@ -82,8 +85,11 @@ class EpisodeRunner:
 
             self.batch.update(post_transition_data, ts=self.t)
             
-            if self.train_stats.get("n_episodes", 0) % 200 == 0:
-                self.env.render()
+            
+            rendering = True
+            if rendering:
+                if self.train_stats.get("n_episodes", 0) % 50 == 0:
+                    self.env.render()
             
             self.t += 1
 
@@ -107,7 +113,19 @@ class EpisodeRunner:
 
         if not test_mode:
             self.t_env += self.t
-
+            
+        if not test_mode:
+            # Dual update:
+            episode_cost = self.batch["cost"][0]
+            T = episode_cost.size()[0]
+            weight = [(1-self.args.gamma)/(1-self.args.gamma**T) * self.args.gamma**t for t in range(T)]
+            discounted_cost = np.dot(weight,episode_cost)
+            lam_grad= discounted_cost
+            self.lam += .0001*lam_grad
+            self.lam = np.maximum(self.lam,0)
+            self.lam = np.minimum(self.lam,self.lam_max)
+            print(discounted_cost,self.lam)
+            
         cur_returns.append(episode_return)
 
         if test_mode and (len(self.test_returns) == self.args.test_nepisode):
