@@ -167,6 +167,8 @@ class MADDPGLearner:
                 inputs.append(last_actions)
         if self.args.obs_agent_id:
             inputs.append(th.eye(self.n_agents, device=batch.device).unsqueeze(0).unsqueeze(0).expand(bs, max_t, -1, -1))
+            
+        inputs.append(batch['lam'].unsqueeze(1).unsqueeze(1).expand(-1,max_t,self.n_agents,-1)) # dimensions: bs,max_t,n_agents,n_constraints
 
         inputs = th.cat(inputs, dim=-1)
         return inputs

@@ -30,6 +30,7 @@ class MADDPGCriticNS(nn.Module):
         # observation
         if self.args.obs_individual_obs:
             input_shape += scheme["obs"]["vshape"]
+        input_shape += scheme["cost"]["vshape"][0]
         return input_shape
 
     def parameters(self):

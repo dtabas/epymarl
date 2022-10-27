@@ -96,7 +96,8 @@ class EpisodeRunner:
         last_data = {
             "state": [self.env.get_state()],
             "avail_actions": [self.env.get_avail_actions()],
-            "obs": [self.env.get_obs()]
+            "obs": [self.env.get_obs()],
+            "lam": self.lam
         }
         self.batch.update(last_data, ts=self.t)
 
@@ -121,7 +122,7 @@ class EpisodeRunner:
             weight = [(1-self.args.gamma)/(1-self.args.gamma**T) * self.args.gamma**t for t in range(T)]
             discounted_cost = np.dot(weight,episode_cost)
             lam_grad= discounted_cost
-            self.lam += .0001*lam_grad
+            self.lam += .001*lam_grad
             self.lam = np.maximum(self.lam,0)
             self.lam = np.minimum(self.lam,self.lam_max)
             print(discounted_cost,self.lam)

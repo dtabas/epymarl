@@ -106,6 +106,7 @@ def run_sequential(args, logger):
         "reward": {"vshape": (), "group": "agents"},
         "cost": {"vshape": (args.n_constraints,)},
         "terminated": {"vshape": (1,), "dtype": th.uint8},
+        "lam": {"vshape": (args.n_constraints,),"episode_const": True}
     }
     groups = {"agents": args.n_agents}
     preprocess = {"actions": ("actions_onehot", [OneHot(out_dim=args.n_actions)])}
