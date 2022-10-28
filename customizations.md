@@ -14,6 +14,9 @@ python3 src/main.py --config=qmix --env-config=gymma with env_args.time_limit=25
 ### Simple 2 player:
 python3 src/main.py --config=coma_ns --env-config=gymma with env_args.time_limit=25 env_args.key="mpe:Simple-2p-v0"
 
+### Simple 2 player with primal dual algorithm and customized critic (MADDPG):
+python3 src/main.py --config=maddpg_pd_ns --env-config=gymma with env_args.time_limit=25 env_args.key="mpe:Simple-2p-v0"
+
 # Other modifications:
 
 ### Register new gym environment:

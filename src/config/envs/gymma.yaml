@@ -9,6 +9,6 @@ test_greedy: True
 test_nepisode: 100
 test_interval: 50000
 log_interval: 50000
-runner_log_interval: 10000
+runner_log_interval: 100
 learner_log_interval: 10000
 t_max: 500000 #2050000

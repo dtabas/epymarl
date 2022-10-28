@@ -8,7 +8,7 @@ from modules.critics import REGISTRY as critic_registry
 from components.standarize_stream import RunningMeanStd
 
 
-class MADDPGLearner:
+class MADDPGPDLearner:
     def __init__(self, mac, scheme, logger, args):
         self.args = args
         self.n_agents = args.n_agents
@@ -41,10 +41,13 @@ class MADDPGLearner:
         rewards = batch["reward"][:, :-1]
         actions = batch["actions_onehot"]
         terminated = batch["terminated"][:, :-1].float()
-        rewards = rewards.unsqueeze(2)#.expand(-1, -1, self.n_agents, -1)
-        terminated = terminated.unsqueeze(2).expand(-1, -1, self.n_agents, -1)
+        rewards = rewards.unsqueeze(3)#.expand(-1, -1, self.n_agents, -1)
+        costs = batch["cost"][:,:-1].unsqueeze(2).expand(-1,-1,self.n_agents,-1)
+        rewards = th.cat((rewards,costs),dim=-1)
+        terminated = terminated.unsqueeze(2).expand(-1, -1, self.n_agents, self.critic.n_outputs)
         mask = 1 - terminated
         batch_size = batch.batch_size
+        lam = batch["lam"]
 
         if self.args.standardise_rewards:
             self.rew_ms.update(rewards)
@@ -54,7 +57,7 @@ class MADDPGLearner:
         inputs = self._build_inputs(batch)
         actions = actions.view(batch_size, -1, 1, self.n_agents * self.n_actions).expand(-1, -1, self.n_agents, -1)
         q_taken = self.critic(inputs[:, :-1], actions[:, :-1].detach())
-        q_taken = q_taken.view(batch_size, -1, 1)
+        q_taken = q_taken.view(batch_size, -1, self.critic.n_outputs)
 
         # Use the target actor and target critic network to compute the target q
         self.target_mac.init_hidden(batch.batch_size)
@@ -66,20 +69,20 @@ class MADDPGLearner:
 
         target_actions = target_actions.view(batch_size, -1, 1, self.n_agents * self.n_actions).expand(-1, -1, self.n_agents, -1)
         target_vals = self.target_critic(inputs[:, 1:], target_actions.detach())
-        target_vals = target_vals.view(batch_size, -1, 1)
+        target_vals = target_vals.view(batch_size, -1, self.critic.n_outputs)
 
         if self.args.standardise_returns:
             target_vals = target_vals * th.sqrt(self.ret_ms.var) + self.ret_ms.mean
 
-        targets = rewards.reshape(-1, 1) + self.args.gamma * (1 - terminated.reshape(-1, 1)) * target_vals.reshape(-1, 1).detach()
+        targets = rewards.reshape(-1, self.critic.n_outputs) + self.args.gamma * (1 - terminated.reshape(-1, self.critic.n_outputs)) * target_vals.reshape(-1, self.critic.n_outputs).detach()
 
         if self.args.standardise_returns:
             self.ret_ms.update(targets)
             targets = (targets - self.ret_ms.mean) / th.sqrt(self.ret_ms.var)
 
-        td_error = (q_taken.view(-1, 1) - targets.detach())
-        masked_td_error = td_error * mask.reshape(-1, 1)
-        loss = (masked_td_error ** 2).mean()
+        td_error = (q_taken.view(-1, self.critic.n_outputs) - targets.detach())
+        masked_td_error = td_error * mask.reshape(-1, self.critic.n_outputs)
+        loss = (th.linalg.norm(masked_td_error,dim=1) ** 2).mean()
 
         self.critic_optimiser.zero_grad()
         loss.backward()
@@ -114,8 +117,11 @@ class MADDPGLearner:
         pis[pis==-1e10] = 0
         pis = pis.reshape(-1, 1)
         q = self.critic(inputs[:, :-1], new_actions)
+        max_t = batch.max_seq_length if t is None else 1
+        lam2 = th.cat((th.ones_like(lam),-lam),dim=1).unsqueeze(1).unsqueeze(1).expand(-1,max_t,self.n_agents,-1)
+        q = th.sum(lam2*q,dim = -1)
         q = q.reshape(-1, 1)
-        mask = mask.reshape(-1, 1)
+        mask = mask[:,:,:,0].reshape(-1, 1)
 
         # Compute the actor loss
         pg_loss = -(q * mask).mean() + self.args.reg * (pis ** 2).mean()

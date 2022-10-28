@@ -114,6 +114,7 @@ class EpisodeRunner:
 
         if not test_mode:
             self.t_env += self.t
+            cur_stats["lam"] = self.lam
             
         if not test_mode:
             # Dual update:

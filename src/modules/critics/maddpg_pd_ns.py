@@ -4,9 +4,9 @@ import torch.nn.functional as F
 from modules.critics.mlp import MLP
 
 
-class MADDPGCriticNS(nn.Module):
+class MADDPGPDCriticNS(nn.Module):
     def __init__(self, scheme, args):
-        super(MADDPGCriticNS, self).__init__()
+        super(MADDPGPDCriticNS, self).__init__()
         self.args = args
         self.n_actions = args.n_actions
         self.n_agents = args.n_agents
@@ -17,7 +17,8 @@ class MADDPGCriticNS(nn.Module):
         if self.args.obs_last_action:
             self.input_shape += self.n_actions
         self.output_type = "q"
-        self.critics = [MLP(self.input_shape, self.args.hidden_dim, 1) for _ in range(self.n_agents)]
+        self.n_outputs = 1 + self.n_constraints
+        self.critics = [MLP(self.input_shape, self.args.hidden_dim, self.n_outputs) for _ in range(self.n_agents)]
 
     def forward(self, inputs, actions):
         inputs = th.cat((inputs, actions), dim=-1) # dimensions: batch, max_t, n_agents, n_inputs
@@ -25,7 +26,7 @@ class MADDPGCriticNS(nn.Module):
         for i in range(self.n_agents):
             q = self.critics[i](inputs[:, :, i]).unsqueeze(2)
             qs.append(q)
-        return th.cat(qs, dim=2)
+        return th.cat(qs, dim=2) # dimensions: batch, max_t, n_agents, n_outputs
 
     def _get_input_shape(self, scheme):
         # state
