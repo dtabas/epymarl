@@ -86,7 +86,7 @@ class EpisodeRunner:
             self.batch.update(post_transition_data, ts=self.t)
             
             
-            rendering = True
+            rendering = False
             if rendering:
                 if self.train_stats.get("n_episodes", 0) % 50 == 0:
                     self.env.render()
@@ -114,7 +114,6 @@ class EpisodeRunner:
 
         if not test_mode:
             self.t_env += self.t
-            cur_stats["lam"] = self.lam
             
         if not test_mode:
             # Dual update:
@@ -122,11 +121,12 @@ class EpisodeRunner:
             T = episode_cost.size()[0]
             weight = [(1-self.args.gamma)/(1-self.args.gamma**T) * self.args.gamma**t for t in range(T)]
             discounted_cost = np.dot(weight,episode_cost)
-            lam_grad= discounted_cost
-            self.lam += .001*lam_grad
+            lam_grad = discounted_cost
+            self.lam += .0001*lam_grad
             self.lam = np.maximum(self.lam,0)
             self.lam = np.minimum(self.lam,self.lam_max)
-            print(discounted_cost,self.lam)
+            cur_stats["cost"] = discounted_cost
+            cur_stats["lam"] = self.lam
             
         cur_returns.append(episode_return)
 

@@ -22,6 +22,6 @@ standardise_rewards: True
 use_rnn: False
 learner: "maddpg_pd_learner"
 agent_output_type: "pi_logits"
-hidden_dim: 128
+hidden_dim: 64
 critic_type: "maddpg_pd_critic_ns"
 name: "maddpg_pd_ns"
