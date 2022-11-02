@@ -54,6 +54,7 @@ class EpisodeRunner:
 
         terminated = False
         episode_return = np.array([0.]*self.env.n_agents)
+        original_rewards = []
         self.mac.init_hidden(batch_size=self.batch_size)
 
         while not terminated:
@@ -75,6 +76,8 @@ class EpisodeRunner:
             cost = [c for r,c in reward_cost]
             cost = cost[0] # costs are the same for each agent
             episode_return += reward
+            original_reward = np.array([r for r,c in reward_cost]).flatten()
+            original_rewards.append(original_reward)
 
             post_transition_data = {
                 "actions": actions,
@@ -106,6 +109,7 @@ class EpisodeRunner:
         self.batch.update({"actions": actions}, ts=self.t)
 
         cur_stats = self.test_stats if test_mode else self.train_stats
+        extra_stats = {}
         cur_returns = self.test_returns if test_mode else self.train_returns
         log_prefix = "test_" if test_mode else ""
         cur_stats.update({k: cur_stats.get(k, 0) + env_info.get(k, 0) for k in set(cur_stats) | set(env_info)})
@@ -125,8 +129,14 @@ class EpisodeRunner:
             self.lam += .0001*lam_grad
             self.lam = np.maximum(self.lam,0)
             self.lam = np.minimum(self.lam,self.lam_max)
-            cur_stats["cost"] = discounted_cost
-            cur_stats["lam"] = self.lam
+            extra_stats["cost"] = discounted_cost
+            extra_stats["lam"] = self.lam
+            
+            original_rewards = np.array(original_rewards)
+            original_returns = np.dot(weight[:-1],original_rewards)
+            assert np.shape(original_returns) == (2,)
+            extra_stats["agent1_return"] = original_returns[0]
+            extra_stats["agent2_return"] = original_returns[1]
             
         cur_returns.append(episode_return)
 
@@ -134,6 +144,7 @@ class EpisodeRunner:
             self._log(cur_returns, cur_stats, log_prefix)
         elif self.t_env - self.log_train_stats_t >= self.args.runner_log_interval:
             self._log(cur_returns, cur_stats, log_prefix)
+            self._log2(extra_stats)
             if hasattr(self.mac.action_selector, "epsilon"):
                 self.logger.log_stat("epsilon", self.mac.action_selector.epsilon, self.t_env)
             self.log_train_stats_t = self.t_env
@@ -148,4 +159,9 @@ class EpisodeRunner:
         for k, v in stats.items():
             if k != "n_episodes":
                 self.logger.log_stat(prefix + k + "_mean" , v/stats["n_episodes"], self.t_env)
+        stats.clear()
+
+    def _log2(self,stats):
+        for k,v in stats.items():
+            self.logger.log_stat(k,v,self.t_env)
         stats.clear()
