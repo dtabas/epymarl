@@ -121,20 +121,20 @@ class EpisodeRunner:
             
         if not test_mode:
             # Dual update:
+            var_alpha = 0.3
             episode_cost = self.batch["cost"][0]
             T = episode_cost.size()[0]
             weight = [(1-self.args.gamma)/(1-self.args.gamma**T) * self.args.gamma**t for t in range(T)]
-            discounted_cost = np.dot(weight,episode_cost)
-            lam_grad = discounted_cost
+            discounted_cost = np.dot(weight,np.maximum(episode_cost-var_alpha,0))
+            lam_grad = discounted_cost - 0.01
             self.lam += .0001*lam_grad
             self.lam = np.maximum(self.lam,0)
             self.lam = np.minimum(self.lam,self.lam_max)
-            extra_stats["cost"] = discounted_cost
-            extra_stats["lam"] = self.lam
+            extra_stats["cost"] = np.sum(discounted_cost)
+            extra_stats["lam"] = np.sum(self.lam)
             
             original_rewards = np.array(original_rewards)
             original_returns = np.dot(weight[:-1],original_rewards)
-            assert np.shape(original_returns) == (2,)
             extra_stats["agent1_return"] = original_returns[0]
             extra_stats["agent2_return"] = original_returns[1]
             

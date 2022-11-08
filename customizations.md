@@ -17,6 +17,9 @@ python3 src/main.py --config=coma_ns --env-config=gymma with env_args.time_limit
 ### Simple 2 player with primal dual algorithm and customized critic (MADDPG):
 python3 src/main.py --config=maddpg_pd_ns --env-config=gymma with env_args.time_limit=25 env_args.key="mpe:Simple-2p-v0"
 
+### Simple 2 player with primal dual algorithm and customized critic (MAA2C):
+python3 src/main.py --config=maa2c_pd_ns --env-config=gymma with env_args.time_limit=25 env_args.key="mpe:Simple-2p-v0"
+
 # Other modifications:
 
 ### Register new gym environment:

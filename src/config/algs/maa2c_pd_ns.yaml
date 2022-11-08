@@ -5,7 +5,7 @@ mask_before_softmax: True
 
 runner: "episode"
 
-buffer_size: 20
+buffer_size: 10
 batch_size_run: 1
 batch_size: 1
 
@@ -24,14 +24,14 @@ obs_individual_obs: False
 mac: "non_shared_mac"
 agent: "rnn_ns"
 agent_output_type: "pi_logits"
-learner: "actor_critic_learner"
+learner: "actor_critic_pd_learner"
 entropy_coef: 0.01
 use_rnn: False
 standardise_returns: False
 standardise_rewards: True
 q_nstep: 5 # 1 corresponds to normal r + gammaV
-critic_type: "cv_critic_ns"
+critic_type: "cv_pd_critic_ns"
 
-name: "maa2c_ns"
+name: "maa2c_pd_ns"
 
 t_max: 1000025 #20050000

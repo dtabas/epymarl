@@ -218,6 +218,12 @@ def run_sequential(args, logger):
             last_test_T = runner.t_env
             for _ in range(n_test_runs):
                 runner.run(test_mode=True)
+            
+            # Compute and log CVaR
+            var,cvar,cvar_ub = compute_cvar(args.gamma,buffer)
+            logger.log_stat("VaR",var,runner.t_env)
+            logger.log_stat("CVaR",cvar,runner.t_env)
+            logger.log_stat("CVaR_ub",cvar_ub,runner.t_env)
 
         if args.save_model and (
             runner.t_env - model_save_time >= args.save_model_interval
@@ -264,3 +270,32 @@ def args_sanity_check(config, _log):
         ) * config["batch_size_run"]
 
     return config
+
+def compute_cvar(gamma,buffer):
+    import scipy.optimize
+    g = gamma
+    C = buffer["cost"]
+    q, T, m = C.size()
+    b = 0.9 # Risk level
+    weights = th.tensor([(1/(q*(1-b)))*((1-g)/(1-g**T)) * g**t for t in range(T)])
+    
+    weights = weights.unsqueeze(0).unsqueeze(2).expand(q,-1,m)
+    
+    var_alpha = 0.3
+    cvar_ub = var_alpha + (weights * th.maximum(C-var_alpha,th.zeros_like(C))).sum()
+        
+    c = th.cat((th.ones(1),weights.flatten()))
+    
+    bounds = [(None,None)] + [(0,None) for _ in range(q*T)]
+    
+    A_ub = -th.cat((th.ones((q*T,1)),th.eye(q*T)),dim = 1)
+    
+    b_ub = -C.flatten()
+    
+    result = scipy.optimize.linprog(c, A_ub = A_ub, b_ub=b_ub,A_eq = None, b_eq = None, bounds=bounds)
+    
+    var = result["x"][0]
+    
+    cvar = result["fun"]
+    
+    return var,cvar,cvar_ub

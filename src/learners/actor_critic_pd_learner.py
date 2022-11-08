@@ -9,7 +9,7 @@ from modules.critics import REGISTRY as critic_resigtry
 from components.standarize_stream import RunningMeanStd
 
 
-class ActorCriticLearner:
+class ActorCriticPDLearner:
     def __init__(self, mac, scheme, logger, args):
         self.args = args
         self.n_agents = args.n_agents
@@ -39,7 +39,9 @@ class ActorCriticLearner:
     def train(self, batch: EpisodeBatch, t_env: int, episode_num: int):
         # Get the relevant quantities
 
-        rewards = batch["reward"][:, :-1]
+        rewards = batch["reward"][:, :-1].unsqueeze(3)
+        costs = batch["cost"][:,:-1].unsqueeze(2).expand(-1,-1,self.n_agents,-1)
+        rewards = th.cat((rewards,costs),dim=-1)
         actions = batch["actions"][:, :]
         terminated = batch["terminated"][:, :-1].float()
         mask = batch["filled"][:, :-1].float()
@@ -55,7 +57,8 @@ class ActorCriticLearner:
             self.logger.console_logger.error("Actor Critic Learner: mask.sum() == 0 at t_env {}".format(t_env))
             return
 
-        mask = mask.repeat(1, 1, self.n_agents)
+        mask_ = mask.clone().repeat(1, 1, self.n_agents)
+        mask = mask.unsqueeze(3).repeat(1, 1, self.n_agents,self.critic.n_outputs)
 
         critic_mask = mask.clone()
 
@@ -72,13 +75,13 @@ class ActorCriticLearner:
         actions = actions[:, :-1]
         advantages = advantages.detach()
         # Calculate policy grad with mask
-        pi[mask == 0] = 1.0
+        pi[mask_ == 0] = 1.0
 
         pi_taken = th.gather(pi, dim=3, index=actions).squeeze(3)
         log_pi_taken = th.log(pi_taken + 1e-10)
 
         entropy = -th.sum(pi * th.log(pi + 1e-10), dim=-1)
-        pg_loss = -((advantages * log_pi_taken + self.args.entropy_coef * entropy) * mask).sum() / mask.sum()
+        pg_loss = -((advantages * log_pi_taken + self.args.entropy_coef * entropy) * mask_).sum() / mask_.sum()
 
         # Optimise agents
         self.agent_optimiser.zero_grad()
@@ -98,11 +101,11 @@ class ActorCriticLearner:
             for key in ["critic_loss", "critic_grad_norm", "td_error_abs", "q_taken_mean", "target_mean"]:
                 self.logger.log_stat(key, sum(critic_train_stats[key])/ts_logged, t_env)
 
-            self.logger.log_stat("advantage_mean", (advantages * mask).sum().item() / mask.sum().item(), t_env)
-            self.logger.log_stat("TD_MSE",((advantages * mask)**2).sum().item()/mask.sum().item(), t_env)
+            self.logger.log_stat("advantage_mean", (advantages * mask_).sum().item() / mask_.sum().item(), t_env)
+            self.logger.log_stat("TD_MSE",((advantages * mask_)**2).sum().item()/mask_.sum().item(), t_env)
             self.logger.log_stat("pg_loss", pg_loss.item(), t_env)
             self.logger.log_stat("agent_grad_norm", grad_norm.item(), t_env)
-            self.logger.log_stat("pi_max", (pi.max(dim=-1)[0] * mask).sum().item() / mask.sum().item(), t_env)
+            self.logger.log_stat("pi_max", (pi.max(dim=-1)[0] * mask_).sum().item() / mask_.sum().item(), t_env)
             self.log_stats_t = t_env
 
     def train_critic_sequential(self, critic, target_critic, batch, rewards, mask):
@@ -132,6 +135,11 @@ class ActorCriticLearner:
         td_error = (target_returns.detach() - v)
         masked_td_error = td_error * mask
         loss = (masked_td_error ** 2).sum() / mask.sum()
+        
+        ts = v.size()[1]
+        lam = batch["lam"]
+        lam2 = th.cat((th.ones((1,1)),-lam),dim=1).unsqueeze(1).unsqueeze(1).expand(-1,ts,self.n_agents,-1)
+        pd_advantage = th.sum(masked_td_error*lam2,axis = -1)
 
         self.critic_optimiser.zero_grad()
         loss.backward()
@@ -144,7 +152,7 @@ class ActorCriticLearner:
         running_log["td_error_abs"].append((masked_td_error.abs().sum().item() / mask_elems))
         running_log["q_taken_mean"].append((v * mask).sum().item() / mask_elems)
         running_log["target_mean"].append((target_returns * mask).sum().item() / mask_elems)
-        return masked_td_error, running_log
+        return pd_advantage, running_log
 
     def nstep_returns(self, rewards, mask, values, nsteps):
         nstep_values = th.zeros_like(values[:, :-1])
