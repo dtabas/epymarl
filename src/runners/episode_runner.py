@@ -121,13 +121,30 @@ class EpisodeRunner:
             
         if not test_mode:
             # Dual update:
-            var_alpha = 0.3
+            constraint_type = self.args.env_args['constraint_type']
             episode_cost = self.batch["cost"][0]
             T = episode_cost.size()[0]
             weight = [(1-self.args.gamma)/(1-self.args.gamma**T) * self.args.gamma**t for t in range(T)]
-            discounted_cost = np.dot(weight,np.maximum(episode_cost-var_alpha,0))
-            lam_grad = discounted_cost - 0.01
-            self.lam += .0001*lam_grad
+            
+            if constraint_type == "expectation":
+                LHS_tolerance = 0
+                RHS_tolerance = 0
+                step_size = .0001
+                modified_cost = episode_cost
+            elif constraint_type == "CVaR":
+                LHS_tolerance = 0.2
+                RHS_tolerance = 0.005
+                step_size = .0001
+                modified_cost = np.maximum(episode_cost-LHS_tolerance,0)
+            elif constraint_type == "chance":
+                LHS_tolerance = 0.1
+                RHS_tolerance = 0.1
+                step_size = .0002
+                modified_cost = (episode_cost > LHS_tolerance)*1.0
+            
+            discounted_cost = np.dot(weight,episode_cost)
+            lam_grad = np.dot(weight,modified_cost - RHS_tolerance)
+            self.lam += step_size*lam_grad
             self.lam = np.maximum(self.lam,0)
             self.lam = np.minimum(self.lam,self.lam_max)
             extra_stats["cost"] = np.sum(discounted_cost)

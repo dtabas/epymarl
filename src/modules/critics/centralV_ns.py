@@ -17,6 +17,8 @@ class CentralVCriticNS(nn.Module):
 
         # Set up network layers
         self.critics = [MLP(input_shape, args.hidden_dim, 1) for _ in range(self.n_agents)]
+        import ipdb
+        ipdb.set_trace()
 
     def forward(self, batch, t=None):
         inputs, bs, max_t = self._build_inputs(batch, t=t)
