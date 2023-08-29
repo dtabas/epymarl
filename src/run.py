@@ -15,6 +15,9 @@ from controllers import REGISTRY as mac_REGISTRY
 from components.episode_buffer import ReplayBuffer
 from components.transforms import OneHot
 
+import scipy.optimize
+import numpy as np
+
 
 def run(_run, _config, _log):
 
@@ -108,8 +111,17 @@ def run_sequential(args, logger):
         "terminated": {"vshape": (1,), "dtype": th.uint8},
         "lam": {"vshape": (args.n_constraints,),"episode_const": True}
     }
+    
+    if args.action_selector == "continuous":
+        scheme["avail_actions"]["vshape"] = (env_info["n_actions"],2)
+        scheme["actions"]["vshape"] = (env_info["n_actions"],)
+        scheme["actions"]["dtype"] = th.float32
+    
     groups = {"agents": args.n_agents}
     preprocess = {"actions": ("actions_onehot", [OneHot(out_dim=args.n_actions)])}
+    
+    if args.action_selector == "continuous":
+        preprocess = None
 
     buffer = ReplayBuffer(
         scheme,
@@ -274,9 +286,7 @@ def args_sanity_check(config, _log):
     return config
 
 def extra_test_stats(gamma,buffer):
-    
-    import scipy.optimize
-    
+        
     g = gamma
     C = buffer["cost"]
     q, T, m = C.size()
@@ -285,13 +295,13 @@ def extra_test_stats(gamma,buffer):
     weights = weights.unsqueeze(0).unsqueeze(2).expand(q,-1,m)
     var_alpha = 0.2
     cvar_ub = var_alpha + ((1/(q*(1-b)))*weights * th.maximum(C-var_alpha,th.zeros_like(C))).sum()
-    c = th.cat((th.ones(1),(1/(q*(1-b)))*weights.flatten()))
-    bounds = [(None,None)] + [(0,None) for _ in range(q*T)]
-    A_ub = -th.cat((th.ones((q*T,1)),th.eye(q*T)),dim = 1)
-    b_ub = -C.flatten()
-    result = scipy.optimize.linprog(c, A_ub = A_ub, b_ub=b_ub,A_eq = None, b_eq = None, bounds=bounds)
-    var = result["x"][0]
-    cvar = result["fun"]
+    #c = th.cat((th.ones(1),(1/(q*(1-b)))*weights.flatten()))
+    #bounds = [(None,None)] + [(0,None) for _ in range(q*T)]
+    #A_ub = -th.cat((th.ones((q*T,1)),th.eye(q*T)),dim = 1)
+    #b_ub = -C.flatten()
+    #result = scipy.optimize.linprog(c, A_ub = A_ub, b_ub=b_ub,A_eq = None, b_eq = None, bounds=bounds)
+    #var = result["x"][0]
+    #cvar = result["fun"]
     
     tol = 0.1
     CV = (C > tol)*1.0
@@ -299,4 +309,5 @@ def extra_test_stats(gamma,buffer):
     
     cost_midpoint = (weights * C).sum(axis=1).mean(axis=0)
     
-    return var,cvar,cvar_ub.item(),P_cv.item(),cost_midpoint.item()
+    #return var,cvar,cvar_ub.item(),P_cv.item(),cost_midpoint.item()
+    return np.nan,np.nan,cvar_ub.item(),P_cv.item(),cost_midpoint.item()

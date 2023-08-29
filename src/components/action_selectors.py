@@ -76,3 +76,33 @@ class SoftPoliciesSelector():
 
 
 REGISTRY["soft_policies"] = SoftPoliciesSelector
+
+from torch.distributions import Normal
+
+class ContinuousActionSelector():
+    
+    def __init__(self, args):
+        self.args = args
+
+        self.schedule = DecayThenFlatSchedule(args.epsilon_start, args.epsilon_finish, args.epsilon_anneal_time,
+                                              decay="linear")
+        self.epsilon = self.schedule.eval(0)
+        
+    def select_action(self, agent_inputs, avail_actions, t_env, test_mode=False):
+  
+        self.epsilon = self.schedule.eval(t_env)
+        stddev = th.ones_like(agent_inputs) * self.epsilon
+
+        # Get Gaussian distribution with mean=agent_inputs and std=epsilon
+        m = Normal(agent_inputs, stddev)
+
+        actions = m.sample()
+        actions = th.tanh(actions) # Clamp the sampled actions to [-1,1] (no longer Gaussian)
+
+        # Mask with zeros
+        masked_actions = actions.clone()
+        masked_actions[avail_actions == (0.,0.)] = 0.
+
+        return masked_actions
+    
+REGISTRY["continuous"] = ContinuousActionSelector

@@ -88,7 +88,9 @@ class _GymmaWrapper(MultiAgentEnv):
         self.n_constraints = self._env.n_constraints
         self._obs = None
 
-        self.longest_action_space = max(self._env.action_space, key=lambda x: x.n)
+        #self.longest_action_space = max(self._env.action_space, key=lambda x: x.n)
+        self.longest_action_space = max(self._env.action_space, 
+                                key=lambda x: flatdim(x))
         self.longest_observation_space = max(
             self._env.observation_space, key=lambda x: x.shape
         )
@@ -156,7 +158,8 @@ class _GymmaWrapper(MultiAgentEnv):
     def get_avail_agent_actions(self, agent_id):
         """ Returns the available actions for agent_id """
         valid = flatdim(self._env.action_space[agent_id]) * [1]
-        invalid = [0] * (self.longest_action_space.n - len(valid))
+        # invalid = [0] * (self.longest_action_space.n - len(valid))
+        invalid = [0]*(flatdim(self.longest_action_space) - len(valid))
         return valid + invalid
 
     def get_total_actions(self):
@@ -204,3 +207,33 @@ class _GymmaWrapper(MultiAgentEnv):
 
 
 REGISTRY["gymma"] = partial(env_fn, env=_GymmaWrapper)
+
+class ContinuousEnv(_GymmaWrapper):
+    def __init__(self, key, time_limit, pretrained_wrapper, **kwargs):
+        super().__init__(key, time_limit, pretrained_wrapper, **kwargs)
+    
+    def get_avail_agent_actions(self,agent_id):
+        """ Returns the available actions for agent_id """
+        valid = flatdim(self._env.action_space[agent_id]) * [1]
+        invalid = [0]*(flatdim(self.longest_action_space) - len(valid))
+        low = self._env.action_space[agent_id].low
+        high = self._env.action_space[agent_id].high
+        return list(zip(low.tolist()+invalid,high.tolist()+invalid))
+    
+    def step(self,actions):
+        """ Returns reward, terminated, info """
+        self._obs, reward, done, info = self._env.step(actions.numpy())
+        self._obs = [
+            np.pad(
+                o,
+                (0, self.longest_observation_space.shape[0] - len(o)),
+                "constant",
+                constant_values=0,
+            )
+            for o in self._obs
+        ]
+
+        return reward, all(done), {}
+        
+    
+REGISTRY["continuous_env"] = partial(env_fn,env=ContinuousEnv)

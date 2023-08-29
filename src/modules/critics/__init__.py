@@ -8,6 +8,7 @@ from .ac import ACCritic
 from .ac_ns import ACCriticNS
 from .maddpg_pd_ns import MADDPGPDCriticNS
 from .centralV_pd_ns import CentralVCriticPDNS
+from .centralV_pd_ns_continuous import CentralVCriticPDNSContinuous
 REGISTRY = {}
 
 REGISTRY["coma_critic"] = COMACritic
@@ -20,3 +21,4 @@ REGISTRY["ac_critic"] = ACCritic
 REGISTRY["ac_critic_ns"] = ACCriticNS
 REGISTRY["maddpg_pd_critic_ns"] = MADDPGPDCriticNS
 REGISTRY["cv_pd_critic_ns"] = CentralVCriticPDNS
+REGISTRY["centralV_pd_ns_continuous"] = CentralVCriticPDNSContinuous

@@ -6,6 +6,8 @@ from .maddpg_learner import MADDPGLearner
 from .ppo_learner import PPOLearner
 from .maddpg_pd_learner import MADDPGPDLearner
 from .actor_critic_pd_learner import ActorCriticPDLearner
+from .actor_critic_pd_learner_continuous import ActorCriticPDLearnerContinuous
+
 REGISTRY = {}
 
 REGISTRY["q_learner"] = QLearner
@@ -16,3 +18,4 @@ REGISTRY["maddpg_learner"] = MADDPGLearner
 REGISTRY["ppo_learner"] = PPOLearner
 REGISTRY["maddpg_pd_learner"] = MADDPGPDLearner
 REGISTRY["actor_critic_pd_learner"] = ActorCriticPDLearner
+REGISTRY["actor_critic_pd_learner_continuous"] = ActorCriticPDLearnerContinuous

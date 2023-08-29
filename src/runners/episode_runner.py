@@ -23,9 +23,9 @@ class EpisodeRunner:
         self.train_stats = {}
         self.test_stats = {}
         
-        self.lam_init = 0
+        self.lam_init = 1e3
         self.lam = np.ones(self.env.n_constraints)* self.lam_init
-        self.lam_max = 10
+        self.lam_max = 1e4
 
         # Log the first run
         self.log_train_stats_t = -1000000
@@ -72,13 +72,13 @@ class EpisodeRunner:
             actions = self.mac.select_actions(self.batch, t_ep=self.t, t_env=self.t_env, test_mode=test_mode)
 
             reward_cost, terminated, env_info = self.env.step(actions[0])
+            
             reward = np.array([r - np.dot(self.lam,c) for r,c in reward_cost]).flatten()
             cost = [c for r,c in reward_cost]
             cost = cost[0] # costs are the same for each agent
             episode_return += reward
             original_reward = np.array([r for r,c in reward_cost]).flatten()
             original_rewards.append(original_reward)
-
             post_transition_data = {
                 "actions": actions,
                 "reward": [(reward,)],
@@ -129,7 +129,7 @@ class EpisodeRunner:
             if constraint_type == "expectation":
                 LHS_tolerance = 0
                 RHS_tolerance = 0
-                step_size = .0001
+                step_size = .1
                 modified_cost = episode_cost
             elif constraint_type == "CVaR":
                 LHS_tolerance = 0.2
@@ -154,6 +154,7 @@ class EpisodeRunner:
             original_returns = np.dot(weight[:-1],original_rewards)
             extra_stats["agent1_return"] = original_returns[0]
             extra_stats["agent2_return"] = original_returns[1]
+            extra_stats["agent3_return"] = original_returns[2]
             
         cur_returns.append(episode_return)
 
